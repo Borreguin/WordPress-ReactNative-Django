@@ -1,0 +1,8 @@
+services:
+  phpmyadmin_config:
+    restart: always
+    ports:
+      - '127.0.0.1:8080:80'
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}

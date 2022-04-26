@@ -1,0 +1,16 @@
+services:
+  wordpress_config:
+    ports:
+      - '443:443'
+      - '80:80'
+    restart: always
+    volumes:
+      - '${WORDPRESS_PATH}'
+      - './certs:/etc/ssl/certs:ro'
+      - './default-ssl.conf:/etc/apache2/sites-available/default-ssl.conf'
+      # - './config/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh'
+    environment:
+      WORDPRESS_DB_HOST: mariadb:3306
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      HOST_IP: ${HOST_IP}

@@ -1,0 +1,4 @@
+/wp-container/config/certs/cert.pem
+/wp-container/config/certs/key.pem
+/wp-container/.env
+/.idea

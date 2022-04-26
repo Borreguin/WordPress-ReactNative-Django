@@ -1,0 +1,42 @@
+# Docker for production purposes of WordPress
+version: '3'
+
+services:
+  # Database
+  mariadb:
+    image: mariadb:10.5.10
+    extends:
+      file: './config/database.yml'
+      service: db_config
+    hostname: mariadb
+    networks:
+      - wpsite
+
+  # phpmyadmin
+  phpmyadmin:
+    depends_on:
+      - mariadb
+    image: phpmyadmin/phpmyadmin
+    extends:
+      file: './config/php-admin.yml'
+      service: phpmyadmin_config
+    hostname: phpmyadmin
+    networks:
+      - wpsite
+
+  # WordPress
+  wordpress:
+    depends_on:
+      - mariadb
+    image: wordpress:latest
+    links:
+      - mariadb:mysql
+    extends:
+      file: './config/wordPress.yml'
+      service: wordpress_config
+    hostname: wordpress
+    networks:
+      - wpsite
+
+networks:
+  wpsite:
