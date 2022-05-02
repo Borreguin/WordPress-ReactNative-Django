@@ -2,3 +2,28 @@
 /wp-container/config/certs/key.pem
 /wp-container/.env
 /.idea
+
+# vue .gitignore
+/user-interface/.DS_Store
+/user-interface/node_modules
+/user-interface/dist
+
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+/user-interface/npm-debug.log*
+/user-interface/yarn-debug.log*
+/user-interface/yarn-error.log*
+/user-interface/pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

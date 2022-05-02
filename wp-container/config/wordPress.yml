@@ -6,8 +6,9 @@ services:
     restart: always
     volumes:
       - '${WORDPRESS_PATH}'
-      - './certs:/etc/ssl/certs:ro'
-      - './default-ssl.conf:/etc/apache2/sites-available/default-ssl.conf'
+      # - './certs:/etc/ssl/certs:ro'
+      # - './default-ssl.conf:/etc/apache2/sites-available/default-ssl.conf'
+      - '../plugins/share-variables-plugin:/var/www/html/wp-content/plugins/share-variables-plugin'
       # - './config/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh'
     environment:
       WORDPRESS_DB_HOST: mariadb:3306
