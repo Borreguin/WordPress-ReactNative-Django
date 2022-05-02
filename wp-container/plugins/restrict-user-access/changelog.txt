@@ -1,0 +1,324 @@
+
+= 1.3 =
+
+* [new] translatepress access condition
+* [new] wordpress 5.4 support
+* [new] minimum wordpress version 4.8
+* [updated] wp-content-aware-engine library
+* [updated] freemius sdk
+
+= 1.2.1 =
+
+* [fixed] condition type cache would in some cases be primed with bad data
+* [fixed] edge case where negated conditions would be ignored
+
+= 1.2 =
+
+* [new] condition type cache for improved performance
+* [new] categories and search in dropdown for access condition types
+* [new] filter to modify [restrict] shortcode
+* [new] filter to disable nav menu restrictions
+* [new] wordpress 5.3 support
+* [new] minimum wordpress version 4.6
+* [updated] ui improvements
+* [updated] wp-content-aware-engine library
+* [updated] wp-db-updater library
+* [updated] freemius sdk
+
+= 1.1.2 =
+
+* [updated] freemius sdk
+
+= 1.1.1 =
+
+* [fixed] bug in developer api
+
+= 1.1 =
+
+* [new] ability to select/deselect all capabilities
+* [new] ability to hide admin toolbar per level
+* [new] quick-add conditions
+* [new] RUA_User_Interface for developer api
+* [new] minimum wordpress version 4.5
+* [new] minimum php version 5.6
+* [new] wordpress 5.2 support
+* [updated] improved ui and performance
+* [updated] user visibility category for Content Aware Sidebars integration
+* [updated] singulars/archives condition setting replaced with page type setting
+* [updated] wp-db-updater library
+* [updated] wp-content-aware-engine library
+* [fixed] bulk remove members from level
+* [fixed] searching for attachments in conditions
+* [fixed] shop condition not working due to bug in woocommerce
+* [fixed] better compatibility with plugins loading unnecessary admin scripts
+* [removed] ability to hide admin toolbar globally
+* [deprecated] various api methods in favor of RUA_User_Interface
+
+
+= 1.0.2 =
+
+* [new] wordpress 5.1 support
+* [updated] freemius sdk - security update
+
+= 1.0.1 =
+
+* [fixed] some hierarchical sub-items could not be selectable as conditions
+* [fixed] conditions would in some cases not be displayed properly after save
+* [updated] wp-content-aware-engine
+* [updated] freemius sdk
+
+= 1.0 =
+
+* [new] redirect to current tab on level update
+* [new] UI improvements
+* [new] improved compatibility with plugins that add unneeded scripts
+* [new] links to docs and support
+* [new] add-ons page
+* [updated] wp-content-aware-engine
+* [updated] freemius sdk
+
+= 0.18 =
+
+* [new] better display of hierarchical items in conditions
+* [new] freemius integration
+* [fixed] only display shortcode fallback page for unauthorized users
+* [fixed] redirecting could in rare cases cause infinite loop
+* [updated] wp-content-aware-engine
+
+= 0.17.2 =
+
+* [new] new admin menu icon
+* [new] wordpress 4.9 support
+* [fixed] redirecting to a restricted page could cause 404
+
+= 0.17.1 =
+
+* [fixed] bug when getting active user levels
+
+= 0.17 =
+
+* [new] sync levels with all logged-in users
+* [new] redirect unauthorized users to custom link
+* [new] visibility shortcode can show content only for users without a level
+* [new] better wpml and polylang compatibility when editing levels
+* [new] performance and memory improvements
+* [new] minimum requirement wordpress 4.1
+* [fixed] do not get levels on frontend that are not active
+* [fixed] minor bug fixes
+* [updated] wp-content-aware-engine
+* [deprecated] api to get user roles
+
+= 0.16 =
+
+* [new] ability to manage more level capabilities
+* [new] better support for RTL languages
+* [new] restrictions now work for password protected posts
+* [new] wordpress 4.8 support
+* [fixed] special characters in translations of conditions
+* [fixed] post type conditions with no titles
+* [fixed] clear user capability cache when its level memberships change
+* [fixed] do not show levels when editing network user profile
+
+= 0.15 =
+
+* [new] rewritten admin screens for improved compatibility and ux
+* [new] performance improvements
+* [new] updated wp-content-aware-engine
+* [new] now requires at least wordpress 4.0
+* [fixed] could not redirect to archive pages after login
+
+= 0.14 =
+
+* [new] autosave conditions
+* [new] wp filter to add condition metadata
+* [new] wp action to add condition actions
+* [new] simplify option to autoselect conditions
+* [new] ui improvements
+* [fixed] type warning on capabilities
+* [fixed] adding multiple members to level at once
+
+= 0.13 =
+
+* [new] ability to restrict all buddypress profile sections
+* [new] exposure moved to condition groups, now called singulars or archives
+* [new] get level capabilities in the API (props Jory Hogeveen)
+* [new] wordpress 4.7 support
+* [new] now requires at least wordpress 3.9
+* [fixed] improved restriction editor UI
+* [fixed] improved search when adding members to level
+* [fixed] better compatibility with other plugins using nav menu editor (props Jory Hogeveen)
+
+= 0.12.4 =
+
+* [new] more compatibility with plugins adding unneeded scripts
+* [fixed] extended capabilities could in rare cases cause white screen
+
+= 0.12.3 =
+
+* [new] counter-measure against plugins that add buggy scripts
+
+= 0.12.2 =
+
+* [fixed] decoding of taxonomy term names in conditions
+* [fixed] order of content in conditions dropdowns
+* [fixed] compatibility for wp versions older than 4.0
+
+= 0.12.1 =
+
+* [new] select2 dropdowns updated to 4.0.3
+* [new] select2 dropdown styles more robust to external changes
+* [fixed] dropdowns on user profile, nav menus, members tab
+
+= 0.12 =
+
+* [new] performance improvements
+* [new] set visibility per level in content aware sidebars
+* [new] drastically reduced database queries when checking taxonomies
+* [new] support for buddypress 2.6 members
+* [new] infinite scroll for content in level conditions editor
+* [new] select2 dropdown styles more robust to external changes
+* [new] dialog on unsaved changes in level conditions editor
+* [new] wordpress 4.6 support
+* [fixed] woocommerce order page inaccessible for users
+* [fixed] option to select all authors and bbpress profiles
+* [fixed] improved level conditions editor ux
+
+= 0.11.1 =
+
+* [new] remove foreign metadata on level deletion
+* [new] use caching when getting user levels synced with role
+* [fixed] add guard for plugins using wp_edit_nav_menu_walker filter wrong
+* [fixed] levels synced with role selectable in user profile
+
+= 0.11 =
+
+* [new] restrict nav menu items to access levels
+* [new] capability column and small improvements in level overview
+* [new] easier to manage levels in user profile
+* [removed] date column in level overview
+
+= 0.10.1 =
+
+* [fixed] admin toolbar could be hidden for admins and displayed when not logged in
+
+= 0.10 =
+
+* [new] access level pages moved to new menu
+* [new] settings page
+* [new] option to hide admin toolbar
+* [new] option to add level on new user
+* [new] api to add and remove user level
+* [new] pods pages module, props @sc0ttkclark @herold
+* [fixed] auth redirection would in rare cases not work
+* [fixed] better compat when other themes or plugins load breaking scripts
+* [fixed] condition logic ui improvements
+
+= 0.9.1 =
+
+* [fixed] api should be loaded everywhere
+
+= 0.9 =
+
+* [new] login-form shortcode
+* [new] user search input stays open on select
+* [new] api to get user roles, user levels, user level start, user level expiry, is user level expired, has user level and get level by name
+* [fixed] expiry bug when level had no duration
+* [fixed] searching users for level
+* [fixed] user search input would in some cases not work
+
+
+= 0.8 =
+
+* [new] level capability manager
+* [new] level editor tabs moved under title
+* [fixed] level members pagination
+* [fixed] performance improvements
+
+= 0.7 =
+
+* [new] completely rewritten level condition ui
+* [new] qtranslate x module
+* [new] ability to drip content
+* [fixed] bug making attachments not selectable
+* [fixed] bumped versions for integrated plugins
+* [fixed] bug when saving user profile
+* [removed] qtranslate module
+
+= 0.6 =
+
+* [new] ability to add members from members screen
+* [new] show level name in overview
+* [new] filter for global access
+* [new] admins will have global access by default
+* [new] level parameter for restrict shortcode
+* [new] email link in members list
+* [new] expired levels included in user list
+* [fixed] hierarchical and synced levels for logged-out users
+* [fixed] fix expiry check when getting levels
+* [fixed] pagination in members list
+* [fixed] levels with members can be saved properly
+* [fixed] duration hidden for synced levels
+
+= 0.5 =
+
+* [new] level durations
+* [new] users can have more than one level
+* [new] levels synced with roles now visible in user list
+* [new] ability to remove and bulk remove users in level members list
+* [new] status column in level members list
+* [fixed] levels synced with roles did not work properly hierarchically
+* [fixed] some array used php5.4+ syntax
+* [fixed] removed warning for missing parameter in action hook
+* [fixed] compatible with wp4.4
+
+= 0.4 =
+
+* [new] allow list of roles in shortcode
+* [new] show number of members in level overview
+* [new] list of members in level editor
+* [new] draft post status included in post type lists
+* [fixed] posts page and front page excluded from page post type list
+* [fixed] gui improvements in level editor
+* [fixed] corrected the way user level dates are stored
+* [fixed] renamed old restriction strings
+
+= 0.3.2 =
+
+* [new] wp4.3 compatibility
+* [new] links to support and faq
+* [fixed] remove warning when no levels exist
+* [fixed] correct link to review page
+
+= 0.3.1 =
+
+* [fixed] access level manager now requires edit_users capability
+* [fixed] users without edit_users capability cannot control their own level
+
+= 0.3 =
+
+* [new] restrictions renamed to access levels
+* [new] hierarchical level functionality
+* [new] levels can be given to individual users or synchronized with roles
+* [new] non-synced levels are displayed in users overview screen
+* [fixed] content would not be restricted properly if two access levels had overlapping conditions for different roles
+* [fixed] actions and filters got new namespaces
+
+= 0.2.2 =
+
+* [fixed] restrictions not working properly for non-logged in users
+
+= 0.2.1 =
+
+* [fixed] if metadata value was 0, default value would be displayed instead
+* [fixed] check if admin column key exists before trying to display metadata
+
+= 0.2 =
+
+* [new] ability to select non-logged in user in restriction manager
+* [fixed] in some cases content could not be removed from condition group
+* [fixed] pagination and search for post types in restriction manager
+* [fixed] some code needed php5.3+
+
+= 0.1 =
+
+* First stable release

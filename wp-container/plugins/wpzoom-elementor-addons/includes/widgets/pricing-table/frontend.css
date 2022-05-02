@@ -1,0 +1,118 @@
+.wpz-pricing-table > .elementor-widget-container {
+	position: relative;
+	overflow: hidden;
+	padding: 3em 4em;
+	border-radius: 5px;
+	background-color: #fff;
+	box-shadow: 0 3px 40px rgba(36, 36, 36, 0.1);
+}
+.wpz-pricing-table-badge {
+	position: absolute;
+	top: -1px;
+	padding: 0.8rem 1rem;
+	background-color: #e2498a;
+	color: #fff;
+	line-height: 1;
+}
+.wpz-pricing-table-badge--left {
+	left: -50px;
+	-webkit-transform: rotate(-90deg) translateX(-100%);
+	-ms-transform: rotate(-90deg) translateX(-100%);
+	transform: rotate(-90deg) translateX(-100%);
+	-webkit-transform-origin: left top;
+	-ms-transform-origin: left top;
+	transform-origin: left top;
+}
+.wpz-pricing-table-badge--right {
+	right: 0;
+	-webkit-transform: rotate(-90deg) translateY(-100%);
+	-ms-transform: rotate(-90deg) translateY(-100%);
+	transform: rotate(-90deg) translateY(-100%);
+	-webkit-transform-origin: right top;
+	-ms-transform-origin: right top;
+	transform-origin: right top;
+}
+.wpz-pricing-table-title {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+	color: #242424;
+	font-weight: 400;
+	font-size: 24px;
+}
+.wpz-pricing-table-price {
+	margin-bottom: 2rem;
+}
+.wpz-pricing-table-price-tag {
+	margin-bottom: 0.5rem;
+	color: #242424;
+	font-weight: 700;
+	font-size: 60px;
+	line-height: normal;
+	display: inline-block;
+}
+.wpz-pricing-table-currency {
+	font-size: 24px;
+}
+.wpz-pricing-table-period {
+	display: inline-block;
+	color: #8c8c8c;
+	font-size: 16px;
+}
+.wpz-pricing-table-body {
+	margin-bottom: 3rem;
+}
+.wpz-pricing-table-features-title {
+	margin-top: 0;
+	margin-bottom: 1rem;
+	font-weight: 700;
+	font-size: 16px;
+}
+
+.wpz-pricing-table-features-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.wpz-pricing-table-features-list li {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: baseline;
+	-webkit-align-items: baseline;
+	align-items: baseline;
+	-ms-flex-align: baseline;
+	margin-bottom: 1rem;
+	font-size: 16px;
+}
+.wpz-pricing-table-features-list li > i,
+.wpz-pricing-table-features-list li > svg {
+	margin-right: 0.5rem;
+	min-width: 15px;
+	text-align: center;
+	font-size: 0.8em;
+}
+.wpz-pricing-table-features-list li > svg {
+	width: auto;
+	height: 1em;
+	fill: currentColor;
+}
+.wpz-pricing-table-feature-text {
+	display: inline-block;
+}
+.wpz-pricing-table-btn {
+	display: inline-block;
+	padding: 0.8rem 2rem;
+	border-radius: 40px;
+	background-color: #e2498a;
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 12px;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.wpz-pricing-table-btn:hover {
+	background-color: #562dd4;
+	color: #fff;
+}

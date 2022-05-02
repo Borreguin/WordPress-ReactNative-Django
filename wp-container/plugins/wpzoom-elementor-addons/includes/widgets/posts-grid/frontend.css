@@ -1,0 +1,45 @@
+.wpz-grid-container .wpz-post {
+    overflow: hidden;
+}
+.wpz-grid-container .wpz-post a.read-more-btn {
+	display: inline-block;
+}
+.wpz-grid-container .post-grid-thumbnail {
+	margin-bottom: 20px;
+}
+.wpz-grid-container .post-grid-meta {
+	margin-bottom: 10px;
+}
+.wpz-grid-container .wpz-post .post-grid-meta span + span:before {
+    margin-left: 2px;
+    margin-right: 4px;
+}
+.grid-meta-bottom .post-grid-text-wrap {
+	border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.grid-meta-bottom .wpz-post {
+    padding: 20px 20px 20px 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+}
+.elementor-widget-wpzoom-elementor-addons-posts-grid .wpz-grid .wpz-grid-container .wpz-post,
+.elementor-widget-wpzoom-elementor-addons-posts-grid .wpz-grid .wpz-grid-container .wpz-post:hover {
+    background: transparent;
+    margin-top: 0;
+}
+.elementor-widget-wpzoom-elementor-addons-posts-grid .wpz-grid .wpz-grid-container .wpz-post .title, 
+.elementor-widget-wpzoom-elementor-addons-posts-grid .wpz-grid .wpz-grid-container .wpz-post .title > a {
+    margin: 5px 0;
+    padding: 5px 0;
+}
+.elementor-widget-wpzoom-elementor-addons-posts-grid .wpz-grid .wpz-grid-container .wpz-post .post-grid-excerpt p,
+.elementor-widget-wpzoom-elementor-addons-posts-grid .wpz-grid .wpz-grid-container .wpz-post a.read-more-btn,
+.elementor-widget-wpzoom-elementor-addons-posts-grid .wpz-grid .wpz-grid-container .wpz-post .post-grid-meta span {
+    font-weight: 400;
+}
+
+.wpz-posts-grid-load-more {
+	display: block;
+	margin:50px 0;
+}

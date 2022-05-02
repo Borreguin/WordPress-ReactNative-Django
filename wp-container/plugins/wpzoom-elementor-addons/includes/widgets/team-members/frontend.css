@@ -1,0 +1,63 @@
+.wpz-member > .elementor-widget-container {
+	padding: 25px;
+	border-radius: 5px;
+	background-color: #fff;
+	box-shadow: 0 3px 40px rgba(36, 36, 36, .1);
+}
+
+.wpz-member-figure {
+	display: inline-block;
+	margin: 0 0 25px !important;
+}
+
+.wpz-member-figure img {
+	width: 100%;
+	height: 100%;
+	vertical-align: bottom;
+	-o-object-fit: cover;
+	object-fit: cover;
+}
+
+.wpz-member-name {
+	margin-top: 0;
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+
+.wpz-member-position {
+	margin-bottom: 25px;
+	font-size: 14px;
+}
+
+.wpz-member-bio {
+	margin-bottom: 25px;
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+.wpz-member-links > a {
+	display: inline-block;
+	text-align: center;
+	line-height: 1;
+	-webkit-transition: all .2s;
+	transition: all .2s;
+}
+
+
+.wpz-member-links > a > i {
+	width: 1em;
+	height: 1em;
+}
+
+.wpz-member-links > a:not(:last-child) {
+	margin-right: 10px;
+}
+
+.wpz-member .wpz-btn {
+	margin-bottom: 15px;
+}
+
+.wpz-member-body .wpz-btn:last-child {
+	margin-top: 15px;
+	margin-bottom: 0;
+}
