@@ -21,6 +21,9 @@ services:
       # Custom plugins
       - '../plugins/wp-rs_share-variables-plugin:/var/www/html/wp-content/plugins/wp-rs_share-variables-plugin'
       - '../plugins/wp-rs_hide_rest_api:/var/www/html/wp-content/plugins/wp-rs_hide_rest_api'
+      # Special configuration (JWT):
+      - '../wp-config/.htaccess:/var/www/html/.htaccess'
+      - '../wp-config/wp-config.php:/var/www/html/wp-config.php'
 
     environment:
       WORDPRESS_DB_HOST: mariadb:3306
