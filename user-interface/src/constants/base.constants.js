@@ -8,3 +8,11 @@ export const conf = {
   wpJwtAuthV1: `${wpJson}${process.env.VUE_APP_API_V1_JWT_AUTH}`,
   wpV2API: `${wpJson}${process.env.VUE_APP_API_V2_FIX}`,
 };
+
+export const httpCodes = {
+  ok: 200,
+  internalError: 500,
+  notFound: 404,
+  forbidden: 403,
+  conflict: 409,
+};

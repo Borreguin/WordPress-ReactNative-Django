@@ -4,4 +4,3 @@ export const wpJWTAPI = {
   token: `${conf.wpJwtAuthV1}/token`,
   validate: `${conf.wpJwtAuthV1}/token/validate`,
 };
-  
