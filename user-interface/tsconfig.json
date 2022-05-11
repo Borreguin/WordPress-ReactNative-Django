@@ -12,8 +12,10 @@
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "noImplicitAny": false,
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "pinia-plugin-persist"
     ],
     "paths": {
       "@/*": [

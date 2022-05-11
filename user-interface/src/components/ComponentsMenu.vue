@@ -1,6 +1,6 @@
 <template>
   <div class="CompMenu">
-    <h1>{{ msg }}</h1>
+    <h1>{{ title }}</h1>
     <p>This menu contains all the developed components:</p>
   </div>
 </template>
@@ -11,7 +11,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "ComponentsMenu",
   props: {
-    msg: String,
+    title: String,
   },
 });
 </script>
