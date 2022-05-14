@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import ComponentMenuView from "./views/ComponentMenu/ComponentMenu.view";
+import ComponentMenuView from "./views/ComponentMenuView/ComponentMenuView";
 import reportWebVitals from "./reportWebVitals";
 import { DevSupport } from "@react-buddy/ide-toolbox";
 import { ComponentPreviews, useInitial } from "./dev";
+import "./i18n/config";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
