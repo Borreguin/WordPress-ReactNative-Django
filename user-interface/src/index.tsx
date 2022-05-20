@@ -4,7 +4,8 @@ import ComponentMenuView from "./views/ComponentMenuView/ComponentMenuView";
 import reportWebVitals from "./reportWebVitals";
 import { DevSupport } from "@react-buddy/ide-toolbox";
 import { ComponentPreviews, useInitial } from "./dev";
-import "./i18n/config";
+import "./i18n/config"; // Allows translation
+import "./utils/icons"; // To use icons across the aplication
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

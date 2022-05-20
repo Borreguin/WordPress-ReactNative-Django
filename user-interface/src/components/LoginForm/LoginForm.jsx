@@ -5,11 +5,8 @@ import {
   Center,
   Divider,
   FormControl,
-  HStack,
-  Icon,
   Input,
   ScrollView,
-  Stack,
   useBreakpointValue,
   View,
   VStack,
@@ -18,9 +15,9 @@ import Styles from "./LoginForm.style";
 import { useTranslation } from "react-i18next";
 import { background } from "../../styles/colors";
 import { bkpColumnToRow, bkpCentralPanel } from "../../styles/theme";
-import { MaterialIcons } from "@expo/vector-icons";
+import FontAwesomeIcon from "react-native-vector-icons/dist/FontAwesome";
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const { t } = useTranslation();
   const flexDir = useBreakpointValue(bkpColumnToRow);
   const centralPanel = useBreakpointValue(bkpCentralPanel);
@@ -36,17 +33,15 @@ const LoginForm = (props) => {
           type={show ? "text" : "password"}
           placeholder={t("passwordHolder")}
           InputRightElement={
-            <Icon
-              as={MaterialIcons}
-              name="visibility"
-              size={5}
-              mr="2"
-              color="muted.400"
+            <FontAwesomeIcon
+              name="eye-slash"
+              size={24}
               onPress={() => setShow(!show)}
-            ></Icon>
+              style={{ marginRight: 1 }}
+            />
           }
         />
-        <Divider my="1" bg={"transparent.100"} />
+        <Divider my="2" bg={"transparent.100"} />
         <Button>{t("login")}</Button>
       </VStack>
     </FormControl>
