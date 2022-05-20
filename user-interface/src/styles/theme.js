@@ -1,4 +1,4 @@
-import { extendTheme, useBreakpointValue } from "native-base";
+import { extendTheme } from "native-base";
 import { background } from "./colors";
 
 export const defaultTheme = extendTheme({
@@ -25,13 +25,41 @@ export const defaultTheme = extendTheme({
       50: "rgba(0,0,0,0.5)",
       100: "rgba(0,0,0,0)",
     },
+    fontConfig: {
+      Roboto: {
+        100: {
+          normal: "Roboto-Light",
+          italic: "Roboto-LightItalic",
+        },
+        200: {
+          normal: "Roboto-Light",
+          italic: "Roboto-LightItalic",
+        },
+        300: {
+          normal: "Roboto-Light",
+          italic: "Roboto-LightItalic",
+        },
+        400: {
+          normal: "Roboto-Regular",
+          italic: "Roboto-Italic",
+        },
+        500: {
+          normal: "Roboto-Medium",
+        },
+        600: {
+          normal: "Roboto-Medium",
+          italic: "Roboto-MediumItalic",
+        },
+      },
+    },
+
     background: {
       default: background.default,
     },
   },
   config: {
-    // Changing initialColorMode to 'dark'
-    initialColorMode: "dark",
+    // Changing initialColorMode to 'dark' / 'light'
+    initialColorMode: "light",
   },
 });
 
@@ -56,8 +84,4 @@ export const bkpCentralPanel = {
   md: "55%",
   lg: "45%",
   xl: "40%",
-};
-
-export const bkpLeftMargin = {
-  md: "20%",
 };
