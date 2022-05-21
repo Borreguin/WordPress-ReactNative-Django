@@ -68,20 +68,3 @@ export const configTheme = {
     "linear-gradient": require("react-native-web-linear-gradient").default,
   },
 };
-
-// Breakpoints:
-export const bkpColumnToRow = {
-  base: "column",
-  sm: "column",
-  md: "column",
-  lg: "row",
-  xl: "row",
-};
-
-export const bkpCentralPanel = {
-  base: "98%",
-  sm: "98%",
-  md: "55%",
-  lg: "45%",
-  xl: "40%",
-};

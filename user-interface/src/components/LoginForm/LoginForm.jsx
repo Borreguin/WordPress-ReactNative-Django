@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Box,
   Button,
   Center,
   Divider,
@@ -14,8 +13,11 @@ import {
 import Styles from "./LoginForm.style";
 import { useTranslation } from "react-i18next";
 import { background } from "../../styles/colors";
-import { bkpColumnToRow, bkpCentralPanel } from "../../styles/theme";
 import FontAwesomeIcon from "react-native-vector-icons/dist/FontAwesome";
+
+import { bkpCentralPanel, bkpColumnToRow } from "../../styles/breackpoints";
+import { HSeparator } from "../Separators/Separators";
+import { Logo } from "../Logo/Logo";
 
 const LoginForm = () => {
   const { t } = useTranslation();
@@ -48,21 +50,19 @@ const LoginForm = () => {
   );
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} minH={"93vh"}>
       <View
         style={{
           flexDirection: flexDir,
           justifyContent: "center",
           alignItems: "center",
         }}
+        minH={"93vh"}
       >
-        <Box
-          bg={background.default}
-          style={[Styles.LoginForm]}
-          w={centralPanel}
-        >
-          {LoginSection}
-        </Box>
+        <Center p={0} w={centralPanel}>
+          <Logo />
+        </Center>
+        <HSeparator />
         <Center
           bg={background.default}
           style={[Styles.LoginForm]}
