@@ -6,6 +6,7 @@ import {
   FormControl,
   Input,
   ScrollView,
+  Text,
   useBreakpointValue,
   View,
   VStack,
@@ -18,12 +19,16 @@ import FontAwesomeIcon from "react-native-vector-icons/dist/FontAwesome";
 import { bkpCentralPanel, bkpColumnToRow } from "../../styles/breackpoints";
 import { HSeparator } from "../Separators/Separators";
 import { Logo } from "../Logo/Logo";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { loginRequested } from "../../store/slices/loginSlice";
 
 const LoginForm = () => {
   const { t } = useTranslation();
   const flexDir = useBreakpointValue(bkpColumnToRow);
   const centralPanel = useBreakpointValue(bkpCentralPanel);
   const [show, setShow] = React.useState(false);
+  const loginMessage = useAppSelector((state) => state.login.message);
+  const dispatch = useAppDispatch();
 
   const LoginSection = (
     <FormControl isRequired>
@@ -43,8 +48,9 @@ const LoginForm = () => {
             />
           }
         />
-        <Divider my="2" bg={"transparent.100"} />
-        <Button>{t("login")}</Button>
+        <Divider my="3" bg={"transparent.100"} />
+        <Button onPress={() => dispatch(loginRequested())}>{t("login")}</Button>
+        <Text>{loginMessage}</Text>
       </VStack>
     </FormControl>
   );

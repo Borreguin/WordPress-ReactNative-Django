@@ -4,5 +4,7 @@
   "username": "User Name",
   "password": "Password",
   "usernameHolder": "Insert your name or email address",
-  "passwordHolder": "Insert your password"
+  "passwordHolder": "Insert your password",
+  "loginSuccess": "Login successful",
+  "LoginFailure": "Login unsuccessful"
 }

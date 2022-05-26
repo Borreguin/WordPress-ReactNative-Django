@@ -4,5 +4,7 @@
   "username": "Nombre de usuario",
   "password": "Contraseña",
   "usernameHolder": "Ingresa tu usuario o correo electrónico",
-  "passwordHolder": "Ingresa tu contraseña"
+  "passwordHolder": "Ingresa tu contraseña",
+  "loginSuccess": "Inicio de sessión exitoso",
+  "LoginFailure": "No se puede iniciar sessión"
 }
