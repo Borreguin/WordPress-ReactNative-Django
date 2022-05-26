@@ -5,7 +5,9 @@ import reportWebVitals from "./reportWebVitals";
 import { DevSupport } from "@react-buddy/ide-toolbox";
 import { ComponentPreviews, useInitial } from "./dev";
 import "./i18n/config"; // Allows translation
-import "./utils/icons"; // To use icons across the aplication
+import "./utils/icons"; // To use icons across the application
+import store from "./store/store"; // Adding redux store to React
+import { Provider } from "react-redux"; // Provide the store to the application
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,7 +18,9 @@ root.render(
       ComponentPreviews={ComponentPreviews}
       useInitialHook={useInitial}
     >
-      <ComponentMenuView />
+      <Provider store={store}>
+        <ComponentMenuView />
+      </Provider>
     </DevSupport>
   </React.StrictMode>
 );
