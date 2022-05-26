@@ -51,7 +51,6 @@ export const { loginOnFailure, loginOnSuccess, loginRequested, loginReset } =
   loginSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const isUserLoggedIn = (state: RootState) => state.login.isLoggedIn;
-export const loginMessageSelect = (state: RootState) => state.login.message;
+export const loginSelector = (state: RootState) => state.login;
 
 export default loginSlice.reducer;
