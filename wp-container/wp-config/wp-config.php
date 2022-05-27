@@ -122,6 +122,8 @@ if ($configExtra = getenv_docker('WORDPRESS_CONFIG_EXTRA', '')) {
 	eval($configExtra);
 }
 
+// JWT Authentication configuration:
+define('SIMPLE_JWT_PRIVATE_KEY', getenv_docker('WORDPRESS_JWT_AUTH_SECRET_KEY', '&RLaCCDIA.00gm|;Yakvk+nW&MPceOVA++&_)S+Ie$#g'));
 
 /* That's all, stop editing! Happy publishing. */
 
