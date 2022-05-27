@@ -6,5 +6,6 @@
   "usernameHolder": "Insert your name or email address",
   "passwordHolder": "Insert your password",
   "loginSuccess": "Login successful",
+  "logoutSuccess": "This session has been closed",
   "LoginFailure": "Login unsuccessful"
 }

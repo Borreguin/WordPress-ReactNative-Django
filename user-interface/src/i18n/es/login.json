@@ -6,5 +6,6 @@
   "usernameHolder": "Ingresa tu usuario o correo electrónico",
   "passwordHolder": "Ingresa tu contraseña",
   "loginSuccess": "Inicio de sessión exitoso",
+  "logoutSuccess": "La sessión ha sido cerrada",
   "LoginFailure": "No se puede iniciar sessión"
 }

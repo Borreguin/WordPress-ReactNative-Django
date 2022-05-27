@@ -6,7 +6,6 @@ import {
   FormControl,
   Input,
   ScrollView,
-  Text,
   useBreakpointValue,
   View,
   VStack,
@@ -17,43 +16,49 @@ import { background } from "../../styles/colors";
 import FontAwesomeIcon from "react-native-vector-icons/dist/FontAwesome";
 
 import { bkpCentralPanel, bkpColumnToRow } from "../../styles/breackpoints";
-import { HSeparator } from "../Separators/Separators";
-import { Logo } from "../Logo/Logo";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { loginRequested } from "../../store/slices/loginSlice";
+import { HSeparator } from "../common/Separators/Separators";
+import { Logo } from "../common/Logo/Logo";
+import { getToken, revokeToken } from "../../store/slices/loginSlice";
+import { connect } from "react-redux";
+import CustomAlert from "../common/CustomAlert/CustomAlert";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+  const { isLoggedIn, loginAction, loginMsg, logoutAction } = props;
+
   const { t } = useTranslation();
   const flexDir = useBreakpointValue(bkpColumnToRow);
   const centralPanel = useBreakpointValue(bkpCentralPanel);
-  const [show, setShow] = React.useState(false);
-  const loginMessage = useAppSelector((state) => state.login.message);
-  const dispatch = useAppDispatch();
 
-  const LoginSection = (
-    <FormControl isRequired>
-      <VStack>
-        <FormControl.Label>{t("username")}</FormControl.Label>
-        <Input placeholder={t("usernameHolder")} />
-        <FormControl.Label>{t("password")}</FormControl.Label>
-        <Input
-          type={show ? "text" : "password"}
-          placeholder={t("passwordHolder")}
-          InputRightElement={
-            <FontAwesomeIcon
-              name="eye-slash"
-              size={24}
-              onPress={() => setShow(!show)}
-              style={{ marginRight: 1 }}
-            />
-          }
-        />
-        <Divider my="3" bg={"transparent.100"} />
-        <Button onPress={() => dispatch(loginRequested())}>{t("login")}</Button>
-        <Text>{loginMessage}</Text>
-      </VStack>
-    </FormControl>
-  );
+  const LoginSection = () => {
+    const [show, setShow] = React.useState(false);
+    return (
+      <FormControl isRequired>
+        <VStack>
+          <FormControl.Label>{t("username")}</FormControl.Label>
+          <Input placeholder={t("usernameHolder")} />
+          <FormControl.Label>{t("password")}</FormControl.Label>
+          <Input
+            type={show ? "text" : "password"}
+            placeholder={t("passwordHolder")}
+            InputRightElement={
+              <FontAwesomeIcon
+                name="eye-slash"
+                size={24}
+                onPress={() => setShow(!show)}
+                style={{ marginRight: 1 }}
+              />
+            }
+          />
+          <Divider my="3" bg={"transparent.100"} />
+          <Button onPress={() => loginAction("test", "test")}>
+            {t("login")}
+          </Button>
+          <Button onPress={() => logoutAction()}>{t("logout")}</Button>
+          <CustomAlert status={"info"} msg={loginMsg} />
+        </VStack>
+      </FormControl>
+    );
+  };
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} minH={"93vh"}>
@@ -74,13 +79,26 @@ const LoginForm = () => {
           style={[Styles.LoginForm]}
           w={centralPanel}
         >
-          {LoginSection}
+          {!isLoggedIn ? <LoginSection /> : <View />}
         </Center>
       </View>
     </ScrollView>
   );
 };
 
-LoginForm.propTypes = {};
+// LoginForm.propTypes = {};
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.login.isLoggedIn,
+    loginMsg: state.login.message,
+  };
+};
 
-export default LoginForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginAction: (userName, password) => dispatch(getToken(userName, password)),
+    logoutAction: () => dispatch(revokeToken()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
