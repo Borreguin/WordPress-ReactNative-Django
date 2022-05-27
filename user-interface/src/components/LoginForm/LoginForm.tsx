@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import { background } from "../../styles/colors";
 import FontAwesomeIcon from "react-native-vector-icons/dist/FontAwesome";
 
-import { bkpCentralPanel, bkpColumnToRow } from "../../styles/breackpoints";
+import { bkpCentralPanel, bkpColumnToRow } from "../../styles/breakpoints";
 import { HSeparator } from "../common/Separators/Separators";
 import { Logo } from "../common/Logo/Logo";
 import { getToken, revokeToken } from "../../store/slices/loginSlice";
