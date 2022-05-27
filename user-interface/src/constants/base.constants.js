@@ -16,3 +16,10 @@ export const httpCodes = {
   forbidden: 403,
   conflict: 409,
 };
+
+// VUE_APP_PROTOCOL=http://
+// VUE_APP_HOST=192.168.100.18
+// # VUE_APP_HOST=192.168.100.121
+// VUE_APP_WP_JSON=/wp-json
+// VUE_APP_API_V2_FIX=/wp/v2
+// VUE_APP_API_V1_JWT_AUTH=/jwt-auth/v1
