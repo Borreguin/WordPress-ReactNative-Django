@@ -12,16 +12,16 @@ services:
       # Useful plugins to start with:
       - '../plugins/add-category-to-pages:/var/www/html/wp-content/plugins/add-category-to-pages'
       - '../plugins/elementor:/var/www/html/wp-content/plugins/elementor'
-      - '../plugins/jwt-authentication-for-wp-rest-api:/var/www/html/wp-content/plugins/jwt-authentication-for-wp-rest-api'
       - '../plugins/login-customizer:/var/www/html/wp-content/plugins/login-customizer'
       - '../plugins/restrict-user-access:/var/www/html/wp-content/plugins/restrict-user-access'
       - '../plugins/user-role-editor:/var/www/html/wp-content/plugins/user-role-editor'
       - '../plugins/wpzoom-elementor-addons:/var/www/html/wp-content/plugins/wpzoom-elementor-addons'
       - '../plugins/wpzoom-portfolio:/var/www/html/wp-content/plugins/wpzoom-portfolio'
+      - '../plugins/simple-jwt-login:/var/www/html/wp-content/plugins/simple-jwt-login'
       # Custom plugins
       - '../plugins/wp-rs_share-variables-plugin:/var/www/html/wp-content/plugins/wp-rs_share-variables-plugin'
       - '../plugins/wp-rs_hide_rest_api:/var/www/html/wp-content/plugins/wp-rs_hide_rest_api'
-      # Special configuration (JWT):
+      # Special configurations:
       - '../wp-config/.htaccess:/var/www/html/.htaccess'
       - '../wp-config/wp-config.php:/var/www/html/wp-config.php'
 
