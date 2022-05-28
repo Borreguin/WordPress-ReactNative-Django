@@ -1,6 +1,7 @@
-import { conf } from "./base.constants";
+import { confApp } from "./base.constants";
 
-export const wpJWTAPI = {
-  token: `${conf.wpJwtAuthV1}/token`,
-  validate: `${conf.wpJwtAuthV1}/token/validate`,
+export const wpJwtAPI = {
+  token: `${confApp.wpJwtApiURL}/auth`,
+  validate: `${confApp.wpJwtApiURL}/auth/validate`,
+  revoke: `${confApp.wpJwtApiURL}/auth/revoke`,
 };

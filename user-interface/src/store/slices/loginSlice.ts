@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { LOGIN_SLICE } from "../storeConstants";
 import i18n from "i18next";
 import { RootState } from "../store";
-import { wpJWTAPI } from "../../constants/wp-api.constants";
+import { wpJwtAPI } from "../../constants/wp-api.constants";
 import axios from "axios";
 import { httpCodes } from "../../constants/base.constants";
 
@@ -95,7 +95,7 @@ export const getToken = (userName, password) => {
     const body = { username: userName, password: password };
     let msg = null;
     const resp = await axios
-      .post(wpJWTAPI.token, body)
+      .post(wpJwtAPI.token, body)
       .catch((e) => (msg = e.message));
     if (resp.status === httpCodes.ok) {
       const { token, user_email, user_nicename, user_display_name } = resp.data;
