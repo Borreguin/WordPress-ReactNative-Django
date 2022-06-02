@@ -5,16 +5,23 @@ import { RootState } from "../store";
 import { wpJwtAPI } from "../../constants/wp-api.constants";
 import axios from "axios";
 import { httpCodes } from "../../constants/base.constants";
+import { isValidEmail } from "../../utils/common";
 
 type User = {
-  user_email: string;
+  ID: string;
+  display_name: string;
+  user_login: string;
   user_nicename: string;
+  user_email: string;
   user_display_name: string;
+  user_url: string;
+  user_registered: string;
+  user_activation_key: string;
+  user_status: string;
 };
 
-type UserPayload = {
-  user: User;
-  token: string;
+type TokenPayload = {
+  jwt: string;
 };
 
 // Define a type for the slice state
@@ -45,12 +52,15 @@ export const loginSlice = createSlice({
       state.loading = true;
       state.message = "Calling the API";
     },
-    loginOnSuccess: (state, action: PayloadAction<UserPayload>) => {
-      state.isLoggedIn = true;
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.message = i18n.t("loginSuccess");
+    loginSetToken: (state, action: PayloadAction<TokenPayload>) => {
+      state.token = action.payload.jwt;
+      state.message = "New Token was set";
       state.loading = false;
+    },
+    loginOnValidToken: (state, action: PayloadAction<User>) => {
+      state.isLoggedIn = true;
+      state.user = action.payload;
+      state.message = i18n.t("loginSuccess");
     },
     loginOnFailure: (state) => {
       loginReset();
@@ -72,11 +82,12 @@ export const loginSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   loginOnFailure,
-  loginOnSuccess,
+  loginSetToken,
   loginRequested,
   loginReset,
   loginOnFailureWithMsg,
   loginLogout,
+  loginOnValidToken,
 } = loginSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
@@ -88,28 +99,58 @@ export default loginSlice.reducer;
  * Action functions for this Slice:
  */
 
-// Login and get a token
-export const getToken = (userName, password) => {
+// Get a token
+export const getToken = (userNameOrMail, password) => {
   return async (dispatch) => {
     dispatch(loginRequested());
-    const body = { username: userName, password: password };
-    let msg = null;
-    const resp = await axios
-      .post(wpJwtAPI.token, body)
-      .catch((e) => (msg = e.message));
-    if (resp.status === httpCodes.ok) {
-      const { token, user_email, user_nicename, user_display_name } = resp.data;
-      const user = {
-        user_email: user_email,
-        user_nicename: user_nicename,
-        user_display_name: user_display_name,
-      } as User;
-      dispatch(loginOnSuccess({ user, token }));
-      return;
+    let body;
+    if (isValidEmail(userNameOrMail)) {
+      body = { email: userNameOrMail, password: password };
+    } else {
+      body = { username: userNameOrMail, password: password };
     }
-    msg === null
-      ? dispatch(loginOnFailure())
-      : dispatch(loginOnFailureWithMsg(msg));
+    await axios
+      .post(wpJwtAPI.token, body)
+      .then((resp) => {
+        if (resp.status === httpCodes.ok) {
+          const { data } = resp.data;
+          dispatch(loginSetToken({ jwt: data.jwt }));
+          dispatch(validateToken());
+        }
+      })
+      .catch((e) => {
+        if (e.response !== undefined && e.response.data !== undefined) {
+          let msg =
+            e.response.data.data.message !== undefined
+              ? e.response.data.data.message
+              : e.message;
+          let tMsg = i18n.t(msg);
+          dispatch(loginOnFailureWithMsg(tMsg));
+        } else {
+          dispatch(loginOnFailure());
+        }
+      });
+  };
+};
+
+// Validate a token
+export const validateToken = () => {
+  return async (dispatch, getState: () => RootState) => {
+    const tokenValidateURL = wpJwtAPI.validate;
+    const body = { JWT: getState().login.token };
+    await axios
+      .get(tokenValidateURL, {
+        params: body,
+      })
+      .then((resp) => {
+        if (resp.status === httpCodes.ok) {
+          const { data } = resp.data;
+          dispatch(loginOnValidToken(data.user as User));
+        }
+      })
+      .catch((e) => {
+        console.log("fail", e);
+      });
   };
 };
 

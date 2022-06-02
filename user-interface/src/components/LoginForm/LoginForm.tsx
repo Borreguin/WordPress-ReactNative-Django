@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Center,
@@ -31,15 +31,24 @@ const LoginForm = (props) => {
 
   const LoginSection = () => {
     const [show, setShow] = React.useState(false);
+    const [userNameOrMail, setUserNameOrMail] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
       <FormControl isRequired>
         <VStack>
           <FormControl.Label>{t("username")}</FormControl.Label>
-          <Input placeholder={t("usernameHolder")} />
+          <Input
+            placeholder={t("usernameHolder")}
+            onChangeText={setUserNameOrMail}
+            value={userNameOrMail}
+          />
           <FormControl.Label>{t("password")}</FormControl.Label>
           <Input
             type={show ? "text" : "password"}
             placeholder={t("passwordHolder")}
+            onChangeText={setPassword}
+            value={password}
             InputRightElement={
               <FontAwesomeIcon
                 name="eye-slash"
@@ -50,11 +59,10 @@ const LoginForm = (props) => {
             }
           />
           <Divider my="3" bg={"transparent.100"} />
-          <Button onPress={() => loginAction("test", "test")}>
+          <Button onPress={() => loginAction(userNameOrMail, password)}>
             {t("login")}
           </Button>
           <Button onPress={() => logoutAction()}>{t("logout")}</Button>
-          <CustomAlert status={"info"} msg={loginMsg} />
         </VStack>
       </FormControl>
     );
@@ -80,6 +88,7 @@ const LoginForm = (props) => {
           w={centralPanel}
         >
           {!isLoggedIn ? <LoginSection /> : <View />}
+          <CustomAlert status={"info"} msg={loginMsg} />
         </Center>
       </View>
     </ScrollView>
@@ -96,7 +105,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginAction: (userName, password) => dispatch(getToken(userName, password)),
+    loginAction: (userNameOrMail, password) =>
+      dispatch(getToken(userNameOrMail, password)),
     logoutAction: () => dispatch(revokeToken()),
   };
 };

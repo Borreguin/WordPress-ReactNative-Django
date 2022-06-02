@@ -1,5 +1,5 @@
 
-// Generated on: Sat May 28 2022 18:37:01 GMT-0500 (Ecuador Time)
+// Generated on: Sun May 29 2022 01:57:19 GMT-0500 (Ecuador Time)
 // This file is generated automatically by: node config-generator.js
 // The variables are taking from '../wp-container/.dev.env'
 
