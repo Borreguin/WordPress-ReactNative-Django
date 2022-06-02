@@ -1,18 +1,20 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import translationEN from "./en/_index-en";
+import translationES from "./es/_index-es";
 
 i18n.use(initReactI18next).init({
   fallbackLng: "es",
   lng: "es",
   resources: {
     en: {
-      login: require("./en/login.json"),
+      translations: translationEN,
     },
     es: {
-      login: require("./es/login.json"),
+      translations: translationES,
     },
   },
-  ns: ["login"],
+  ns: ["translations"],
   // defaultNS: "translations",
 });
 
