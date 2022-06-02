@@ -62,7 +62,6 @@ const LoginForm = (props) => {
           <Button onPress={() => loginAction(userNameOrMail, password)}>
             {t("login")}
           </Button>
-          <Button onPress={() => logoutAction()}>{t("logout")}</Button>
         </VStack>
       </FormControl>
     );
@@ -87,7 +86,14 @@ const LoginForm = (props) => {
           style={[Styles.LoginForm]}
           w={centralPanel}
         >
-          {!isLoggedIn ? <LoginSection /> : <View />}
+          {!isLoggedIn ? (
+            <LoginSection />
+          ) : (
+            <Button onPress={() => logoutAction()} w={"100%"}>
+              {t("logout")}
+            </Button>
+          )}
+
           <CustomAlert status={"info"} msg={loginMsg} />
         </Center>
       </View>

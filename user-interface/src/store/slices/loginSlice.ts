@@ -50,7 +50,7 @@ export const loginSlice = createSlice({
     loginRequested: (state) => {
       loginReset();
       state.loading = true;
-      state.message = "Calling the API";
+      state.message = i18n.t("loading");
     },
     loginSetToken: (state, action: PayloadAction<TokenPayload>) => {
       state.token = action.payload.jwt;
@@ -99,6 +99,27 @@ export default loginSlice.reducer;
  * Action functions for this Slice:
  */
 
+// dispatch actions on error
+const dispatchOnError = (dispatch, e) => {
+  if (e.response !== undefined && e.response.data !== undefined) {
+    let msg =
+      e.response.data.data.message !== undefined
+        ? e.response.data.data.message
+        : e.message;
+    let tMsg = i18n.t(msg);
+    dispatch(loginOnFailureWithMsg(tMsg));
+  } else {
+    dispatch(loginOnFailure());
+  }
+};
+
+// create header for sending the token
+export const createTokenHeader = (token) => {
+  return {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+};
+
 // Get a token
 export const getToken = (userNameOrMail, password) => {
   return async (dispatch) => {
@@ -118,45 +139,38 @@ export const getToken = (userNameOrMail, password) => {
           dispatch(validateToken());
         }
       })
-      .catch((e) => {
-        if (e.response !== undefined && e.response.data !== undefined) {
-          let msg =
-            e.response.data.data.message !== undefined
-              ? e.response.data.data.message
-              : e.message;
-          let tMsg = i18n.t(msg);
-          dispatch(loginOnFailureWithMsg(tMsg));
-        } else {
-          dispatch(loginOnFailure());
-        }
-      });
+      .catch((e) => dispatchOnError(dispatch, e));
   };
 };
 
 // Validate a token
 export const validateToken = () => {
   return async (dispatch, getState: () => RootState) => {
-    const tokenValidateURL = wpJwtAPI.validate;
-    const body = { JWT: getState().login.token };
+    const config = createTokenHeader(getState().login.token);
     await axios
-      .get(tokenValidateURL, {
-        params: body,
-      })
+      .post(wpJwtAPI.validate, {}, config)
       .then((resp) => {
         if (resp.status === httpCodes.ok) {
           const { data } = resp.data;
           dispatch(loginOnValidToken(data.user as User));
         }
       })
-      .catch((e) => {
-        console.log("fail", e);
-      });
+      .catch((e) => dispatchOnError(dispatch, e));
   };
 };
 
 // Logout and revoke token
 export const revokeToken = () => {
-  return async (dispatch) => {
-    dispatch(loginLogout());
+  return async (dispatch, getState: () => RootState) => {
+    const config = createTokenHeader(getState().login.token);
+    dispatch(loginReset());
+    await axios
+      .post(wpJwtAPI.revoke, {}, config)
+      .then((resp) => {
+        if (resp.status === httpCodes.ok) {
+          dispatch(loginLogout());
+        }
+      })
+      .catch((e) => dispatchOnError(dispatch, e));
   };
 };

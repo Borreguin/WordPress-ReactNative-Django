@@ -5,5 +5,12 @@ import { bkpBigImage } from "../../../styles/breakpoints";
 
 export const Logo = () => {
   const logoSize = useBreakpointValue(bkpBigImage);
-  return <Image source={LogoImage} resizeMode={"contain"} size={logoSize} />;
+  return (
+    <Image
+      source={LogoImage}
+      resizeMode={"contain"}
+      size={logoSize}
+      alt={"Logo"}
+    />
+  );
 };
