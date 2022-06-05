@@ -9,6 +9,8 @@ const loginT_ES = {
   logoutSuccess: "La sessión ha sido cerrada",
   LoginFailure: "No se puede iniciar sessión",
   "Wrong user credentials.": "Credenciales de usuario incorrectas.",
+  setToken: "Credenciales correctas...",
+  welcome: "Bienvenido",
 };
 
 export default loginT_ES;
