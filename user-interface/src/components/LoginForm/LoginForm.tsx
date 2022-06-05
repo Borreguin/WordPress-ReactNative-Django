@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Button,
   Center,
@@ -46,13 +46,15 @@ const LoginForm = (props) => {
   const [userNameOrMail, setUserNameOrMail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    return () => {
-      if (isLoggedIn) {
-        loginValidateTokenAction();
-      }
-    };
+  const validateCurrentToken = useCallback(() => {
+    if (isLoggedIn) {
+      loginValidateTokenAction();
+    }
   }, []);
+
+  useEffect(() => {
+    validateCurrentToken();
+  }, [validateCurrentToken]);
 
   useEffect(() => {
     onLogin(isLoggedIn);
