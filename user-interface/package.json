@@ -30,6 +30,7 @@
     "react-native-web-linear-gradient": "^1.1.2",
     "react-redux": "^8.0.2",
     "react-scripts": "5.0.1",
+    "redux-persist": "^6.0.0",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
@@ -74,7 +75,7 @@
   "jest": {
     "preset": "react-native"
   },
-  "description": "This project is designed to work in web and android",
+  "description": "This project is designed to work in web and android, connected with Wordpress",
   "main": "babel.config.js",
   "author": "Roberto Sanchez A."
 }

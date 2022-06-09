@@ -1,5 +1,25 @@
 import { configureStore } from "@reduxjs/toolkit";
 import loginReducer from "./slices/loginSlice";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { LOGIN_SLICE } from "./storeConstants";
+
+// configure the redux persist library:
+const persistConfig = {
+  key: "root",
+  version: 1,
+  storage,
+  blacklist: [LOGIN_SLICE],
+};
 
 // Redux Toolkit allows us to write "mutating" logic in reducers. It
 // doesn't actually mutate the state because it uses the Immer library,
@@ -8,11 +28,19 @@ import loginReducer from "./slices/loginSlice";
 
 const store = configureStore({
   reducer: {
-    login: loginReducer,
+    // add persistReducer for those reducers that needs to persist their state:
+    login: persistReducer(persistConfig, loginReducer),
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export default store;
+export const persistor = persistStore(store);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

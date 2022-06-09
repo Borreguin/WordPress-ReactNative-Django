@@ -20,6 +20,11 @@ type User = {
   user_status: string;
 };
 
+type LoginResp = {
+  user: User;
+  roles: Array<string>;
+};
+
 type TokenPayload = {
   jwt: string;
 };
@@ -28,6 +33,7 @@ type TokenPayload = {
 interface LoginState {
   isLoggedIn: boolean;
   user: User | null;
+  roles: Array<string> | null;
   token: string | null;
   message: string | null;
   loading: boolean;
@@ -37,6 +43,7 @@ interface LoginState {
 const initialState: LoginState = {
   isLoggedIn: false,
   user: null,
+  roles: [],
   token: null,
   message: "",
   loading: false,
@@ -48,33 +55,28 @@ export const loginSlice = createSlice({
   reducers: {
     loginReset: () => initialState,
     loginRequested: (state) => {
-      loginReset();
       state.loading = true;
       state.message = i18n.t("loading");
     },
     loginSetToken: (state, action: PayloadAction<TokenPayload>) => {
       state.token = action.payload.jwt;
-      state.message = "New Token was set";
+      state.message = i18n.t("setToken");
       state.loading = false;
     },
-    loginOnValidToken: (state, action: PayloadAction<User>) => {
+    loginOnValidToken: (state, action: PayloadAction<LoginResp>) => {
       state.isLoggedIn = true;
-      state.user = action.payload;
+      state.user = action.payload.user;
+      state.roles = action.payload.roles;
       state.message = i18n.t("loginSuccess");
     },
-    loginOnFailure: (state) => {
-      loginReset();
-      state.loading = false;
-      state.message = i18n.t("LoginFailure");
+    loginOnFailure: () => {
+      return { ...initialState, message: i18n.t("LoginFailure") };
     },
     loginOnFailureWithMsg: (state, action: PayloadAction<string>) => {
-      loginReset();
-      state.loading = false;
-      state.message = action.payload;
+      return { ...initialState, message: action.payload };
     },
-    loginLogout: (state) => {
-      loginReset();
-      state.message = i18n.t("logoutSuccess");
+    loginLogout: () => {
+      return { ...initialState, message: i18n.t("logoutSuccess") };
     },
   },
 });
@@ -108,6 +110,8 @@ const dispatchOnError = (dispatch, e) => {
         : e.message;
     let tMsg = i18n.t(msg);
     dispatch(loginOnFailureWithMsg(tMsg));
+  } else if (e.message !== undefined) {
+    dispatch(loginOnFailureWithMsg(e.message));
   } else {
     dispatch(loginOnFailure());
   }
@@ -139,7 +143,8 @@ export const getToken = (userNameOrMail, password) => {
           dispatch(validateToken());
         }
       })
-      .catch((e) => dispatchOnError(dispatch, e));
+      .catch((e) => dispatchOnError(dispatch, e))
+      .then(() => dispatch(openWordPressSession()));
   };
 };
 
@@ -148,11 +153,13 @@ export const validateToken = () => {
   return async (dispatch, getState: () => RootState) => {
     const config = createTokenHeader(getState().login.token);
     await axios
-      .post(wpJwtAPI.validate, {}, config)
+      .get(wpJwtAPI.validate, config)
       .then((resp) => {
         if (resp.status === httpCodes.ok) {
           const { data } = resp.data;
-          dispatch(loginOnValidToken(data.user as User));
+          dispatch(
+            loginOnValidToken({ user: data.user as User, roles: data.roles })
+          );
         }
       })
       .catch((e) => dispatchOnError(dispatch, e));
@@ -162,8 +169,11 @@ export const validateToken = () => {
 // Logout and revoke token
 export const revokeToken = () => {
   return async (dispatch, getState: () => RootState) => {
+    if (getState().login.token === null) {
+      dispatch(loginLogout());
+      return;
+    }
     const config = createTokenHeader(getState().login.token);
-    dispatch(loginReset());
     await axios
       .post(wpJwtAPI.revoke, {}, config)
       .then((resp) => {
@@ -172,5 +182,30 @@ export const revokeToken = () => {
         }
       })
       .catch((e) => dispatchOnError(dispatch, e));
+  };
+};
+
+// open WordPress session:
+export const openWordPressSession = () => {
+  return async (dispatch, getState: () => RootState) => {
+    console.log("me openWordPress Session", wpJwtAPI.autoLogin);
+    if (getState().login.token === null) {
+      dispatch(loginLogout());
+      return;
+    }
+    // const config = createTokenHeader(getState().login.token);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getState().login.token}`,
+      },
+    };
+    await axios
+      .get(wpJwtAPI.autoLogin, config)
+      .then((resp) => {
+        console.log("resp", resp);
+        // window.location.href = confApp.baseURL + "/home";
+      })
+      .catch((e) => dispatchOnError(dispatch, e));
+    console.log("finishing");
   };
 };

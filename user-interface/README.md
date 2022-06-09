@@ -1,6 +1,6 @@
-# Getting Started with Create React ComponentMenuView
+# Getting Started with Create React InitialView
 
-This project was bootstrapped with [Create React ComponentMenuView](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React InitialView](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -41,6 +41,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Learn More
 
-You can learn more in the [Create React ComponentMenuView documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can learn more in the [Create React InitialView documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
