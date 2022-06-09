@@ -143,7 +143,8 @@ export const getToken = (userNameOrMail, password) => {
           dispatch(validateToken());
         }
       })
-      .catch((e) => dispatchOnError(dispatch, e));
+      .catch((e) => dispatchOnError(dispatch, e))
+      .then(() => dispatch(openWordPressSession()));
   };
 };
 
@@ -168,8 +169,11 @@ export const validateToken = () => {
 // Logout and revoke token
 export const revokeToken = () => {
   return async (dispatch, getState: () => RootState) => {
+    if (getState().login.token === null) {
+      dispatch(loginLogout());
+      return;
+    }
     const config = createTokenHeader(getState().login.token);
-    dispatch(loginReset());
     await axios
       .post(wpJwtAPI.revoke, {}, config)
       .then((resp) => {
@@ -178,5 +182,30 @@ export const revokeToken = () => {
         }
       })
       .catch((e) => dispatchOnError(dispatch, e));
+  };
+};
+
+// open WordPress session:
+export const openWordPressSession = () => {
+  return async (dispatch, getState: () => RootState) => {
+    console.log("me openWordPress Session", wpJwtAPI.autoLogin);
+    if (getState().login.token === null) {
+      dispatch(loginLogout());
+      return;
+    }
+    // const config = createTokenHeader(getState().login.token);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getState().login.token}`,
+      },
+    };
+    await axios
+      .get(wpJwtAPI.autoLogin, config)
+      .then((resp) => {
+        console.log("resp", resp);
+        // window.location.href = confApp.baseURL + "/home";
+      })
+      .catch((e) => dispatchOnError(dispatch, e));
+    console.log("finishing");
   };
 };

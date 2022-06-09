@@ -17,7 +17,6 @@ add_filter( 'rest_authentication_errors', function( $result ) {
   if ( ! is_user_logged_in() ) {
     global $wp;
     // To obtain url of the requested resource, this allows access for not logged in users:
-    // To obtain url of the requested resource, this allows access for not logged in users:
     $request = $wp->request;
     $route = empty( $request) ? $wp->query_vars['rest_route']: $request;
     switch ($route) {
@@ -32,6 +31,13 @@ add_filter( 'rest_authentication_errors', function( $result ) {
   }
   return $result;
 });
+
+function add_cors_http_header(){
+    header("Access-Control-Allow-Headers: *");
+    header("Access-Control-Allow-Origin: *");
+}
+add_action('init','add_cors_http_header');
+
 
 
 ?>
