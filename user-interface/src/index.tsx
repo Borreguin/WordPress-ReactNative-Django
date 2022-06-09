@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import ComponentMenuView from "./views/InitialView/InitialView";
-import reportWebVitals from "./reportWebVitals";
+import InitialView from "./views/InitialView/InitialView";
 import { DevSupport } from "@react-buddy/ide-toolbox";
 import { ComponentPreviews, useInitial } from "./dev";
 import "./i18n/config"; // Allows translation
@@ -13,6 +12,7 @@ import { PersistGate } from "redux-persist/integration/react"; // Provide the st
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <DevSupport
@@ -21,7 +21,7 @@ root.render(
     >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <ComponentMenuView />
+          <InitialView />
         </PersistGate>
       </Provider>
     </DevSupport>
@@ -31,4 +31,4 @@ root.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();
