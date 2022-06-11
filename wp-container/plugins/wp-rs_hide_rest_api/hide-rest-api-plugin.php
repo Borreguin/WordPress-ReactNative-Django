@@ -23,8 +23,7 @@ function frontend_scripts() {
 	wp_enqueue_script(
 	'wds-wwe-frontend-js',
 	plugins_url( 'assets/js/frontend.js', __FILE__ ),
-	[ 'jquery' ],
-	'11272018'
+	[ ], 'v.0.0.1'
 	);
 }
 add_action( 'wp_enqueue_scripts', 'frontend_scripts' );
@@ -36,8 +35,7 @@ function admin_scripts() {
 	wp_enqueue_script(
 	'wds-wwe-admin-js',
 	plugins_url( 'assets/js/admin.js', __FILE__ ),
-	[ 'jquery' ],
-	'11272018'
+	[ ]
 	);
 }
 add_action( 'admin_enqueue_scripts', 'admin_scripts' );
