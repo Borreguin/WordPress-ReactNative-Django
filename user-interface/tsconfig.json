@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES6",
+    "declaration": false,
+    "strictNullChecks": true,
+    "lib": ["dom", "ES6", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,7 +17,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "sourceMap": true,
     "baseUrl": ".",
     "noImplicitAny": false
@@ -30,5 +32,5 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

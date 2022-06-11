@@ -7,8 +7,8 @@ const config = {
   // One for frontend and one for the admin area.
   entry: {
     // frontend and admin will replace the [name] portion of the output config below.
-    frontend: "./src/webpack-entry-points/index-frontend.tsx",
-    // admin: "./src/index.tsx",
+    frontend: "./src/webpack-entry-points/frontend-index.tsx",
+    admin: "./src/webpack-entry-points/admin-index.tsx",
   },
 
   // Create the output files.
