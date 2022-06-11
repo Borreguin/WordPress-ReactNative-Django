@@ -1,5 +1,5 @@
-import { NativeBaseProvider } from "native-base";
 import React, { useState } from "react";
+import { NativeBaseProvider } from "native-base";
 import { configTheme, defaultTheme } from "../../styles/theme";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { connect } from "react-redux";
