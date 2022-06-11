@@ -37,10 +37,11 @@
   "scripts": {
     "start": "node config-generator.js && react-app-rewired start",
     "start-prod": "NODE_ENV=prod node config-generator.js && react-app-rewired start",
-    "build": "NODE_ENV=prod node config-generator.js && webpack --mode=production --config webpack-config.js",
+    "build": "NODE_ENV=prod node config-generator.js && webpack --mode=production --config webpack-config.js && node publish-assets.js",
     "build-dev": "NODE_ENV=dev node config-generator.js && react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "send": "node publish-assets.js"
   },
   "eslintConfig": {
     "extends": [
