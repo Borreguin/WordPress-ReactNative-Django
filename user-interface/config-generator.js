@@ -1,3 +1,8 @@
+/**
+ * This file creates a config.js using environmental variables for the whole project.
+ * Generate ./src/constants/config.js
+ */
+
 const fs = require("fs");
 
 let env_file_path;
