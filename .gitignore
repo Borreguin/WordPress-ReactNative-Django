@@ -27,3 +27,6 @@
 *.njsproj
 *.sln
 *.sw?
+
+# exclude temporal build
+/wp-container/plugins/wp-rs-rest-api/build/
