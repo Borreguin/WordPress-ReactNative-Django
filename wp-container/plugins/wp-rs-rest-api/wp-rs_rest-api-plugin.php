@@ -1,8 +1,8 @@
 <?php 
 /**
- * Plugin Name: WP-RS: Hide REST API
+ * Plugin Name: WP-RS: REST API MANAGEMENT
  * Plugin URI: 
- * Description: Hide REST API for user that are not logged
+ * Description: REST API for management
  * Version: 1
  * Author: Roberto Sánchez 
  * Author URI: 
@@ -22,7 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
 function frontend_scripts() {
 	wp_enqueue_script(
 	'wds-wwe-frontend-js',
-	plugins_url( 'assets/js/frontend.js', __FILE__ ),
+	plugins_url( 'build/static/js/frontend.js', __FILE__ ),
 	[ ], 'v.0.0.1'
 	);
 }
@@ -34,15 +34,13 @@ add_action( 'wp_enqueue_scripts', 'frontend_scripts' );
 function admin_scripts() {
 	wp_enqueue_script(
 	'wds-wwe-admin-js',
-	plugins_url( 'assets/js/admin.js', __FILE__ ),
+	plugins_url( 'build/static/js/admin.js', __FILE__ ),
 	[ ]
 	);
 }
 add_action( 'admin_enqueue_scripts', 'admin_scripts' );
 
-
-
-
+// This allows to hide endpoints to non-authenticated users:
 add_filter( 'rest_authentication_errors', function( $result ) {
   if ( ! empty( $result ) ) {
     return $result;
@@ -52,6 +50,7 @@ add_filter( 'rest_authentication_errors', function( $result ) {
     // To obtain url of the requested resource, this allows access for not logged in users:
     $request = $wp->request;
     $route = empty( $request) ? $wp->query_vars['rest_route']: $request;
+    // whitelist for non-authenticated users
     switch ($route) {
       case '/jwt-login/v1/auth':
         return $result;

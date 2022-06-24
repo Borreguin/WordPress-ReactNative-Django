@@ -1,1 +1,0 @@
-!function(){"use strict";({log(t){console.log(function(t){var c=new Date,n="[".concat(c.getFullYear(),"-").concat(c.getMonth(),"-").concat(c.getDay()," ").concat(c.getHours(),":").concat(c.getMinutes(),":").concat(c.getSeconds(),"]");return"".concat(n," - ").concat(t)}(t))}}).log("This is a message to the admin! v.0.0.1")}();
