@@ -8,7 +8,7 @@ import { validateToken } from "../../store/slices/loginSlice";
 
 const InitialView = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-
+  console.log(loggedIn);
   return (
     <NativeBaseProvider theme={defaultTheme} config={configTheme}>
       <LoginForm onLogin={setLoggedIn} />

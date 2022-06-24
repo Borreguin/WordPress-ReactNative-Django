@@ -72,7 +72,7 @@ export const loginSlice = createSlice({
     loginOnFailure: () => {
       return { ...initialState, message: i18n.t("LoginFailure") };
     },
-    loginOnFailureWithMsg: (state, action: PayloadAction<string>) => {
+    loginOnFailureWithMsg: (_, action: PayloadAction<string>) => {
       return { ...initialState, message: action.payload };
     },
     loginLogout: () => {
