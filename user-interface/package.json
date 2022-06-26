@@ -36,9 +36,7 @@
   "scripts": {
     "start": "node config-generator.js && react-app-rewired start",
     "start-prod": "NODE_ENV=prod node config-generator.js && react-app-rewired start",
-    "start-web": "NODE_ENV=prod node config-generator.js && webpack-dev-server --config webpack-config.js",
-    "build-web": "NODE_ENV=prod node config-generator.js && react-app-rewired build && node publish-build.js",
-    "build": "NODE_ENV=prod node config-generator.js && react-app-rewired build",
+    "build": "NODE_ENV=prod node config-generator.js && react-app-rewired build && node publish-build.js",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "send": "node publish-build.js"

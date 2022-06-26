@@ -64,12 +64,24 @@ add_filter( 'rest_authentication_errors', function( $result ) {
   return $result;
 });
 
+// This hide the default user bar and it is substituted by:
+add_filter( 'show_admin_bar', '__return_true');
+
+
 function add_cors_http_header(){
     header("Access-Control-Allow-Headers: *");
     header("Access-Control-Allow-Origin: *");
 }
 add_action('init','add_cors_http_header');
 
-
+// function tf_check_user_role( $roles ) {
+//     // Check user logged-in
+//
+//     return false;
+// }
+// $roles = [ 'customer', 'subscriber' ];
+// if ( tf_check_user_role($roles) ) {
+//     add_filter('show_admin_bar', '__return_false');
+// }
 
 ?>

@@ -3,13 +3,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "../i18n/config"; // Allows translation
 import "../utils/icons"; // Allows to use icons across the application
-import configEnv from "../constants/config";
-import { Text } from "native-base";
-
-// import store, { persistor } from "../store/store";
-// import { PersistGate } from "redux-persist/integration/react";
-// import InitialView from "../views/InitialView/InitialView"; // To use icons across the application
-// import { Provider } from "react-redux";
+import { Provider } from "react-redux";
+import store, { persistor } from "../store/store";
+import { PersistGate } from "redux-persist/integration/react";
+import InitialView from "../views/InitialView/InitialView";
 
 window.onload = renderThisComponent;
 
@@ -22,8 +19,11 @@ function renderThisComponent() {
     console.log("Going to render in this", root);
     root.render(
       <React.StrictMode>
-        <Text>This is an example, check date:</Text>
-        <div>{configEnv.COMP_TIME}</div>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <InitialView />
+          </PersistGate>
+        </Provider>
       </React.StrictMode>
     );
   }

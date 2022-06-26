@@ -14,8 +14,8 @@ module.exports = function override(config) {
     config.entry = {
       // main: path.resolve(__dirname, "./src/index.tsx"),
       main: path.resolve(entryPointPath, "admin-index.tsx"),
-      // frontend: path.resolve(entryPointPath, "frontend-index.tsx"),
-      frontend: path.resolve(__dirname, "./src/index.tsx"),
+      frontend: path.resolve(entryPointPath, "frontend-index.tsx"),
+      // frontend: path.resolve(__dirname, "./src/index.tsx"),
       admin: path.resolve(entryPointPath, "admin-index.tsx"),
     };
 
@@ -27,7 +27,6 @@ module.exports = function override(config) {
     };
     console.log(`Compile with the following configuration:`);
     console.log(config);
-    console.log(configEnv);
   }
 
   return config;
