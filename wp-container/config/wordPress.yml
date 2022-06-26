@@ -19,8 +19,8 @@ services:
       - '../plugins/wpzoom-portfolio:/var/www/html/wp-content/plugins/wpzoom-portfolio'
       - '../plugins/simple-jwt-login:/var/www/html/wp-content/plugins/simple-jwt-login'
       # Custom plugins
-      - '../plugins/wp-rs_share-variables-plugin:/var/www/html/wp-content/plugins/wp-rs_share-variables-plugin'
-      - '../plugins/wp-rs_hide_rest_api:/var/www/html/wp-content/plugins/wp-rs_hide_rest_api'
+      - '../plugins/wp-rs-share-variables-plugin:/var/www/html/wp-content/plugins/wp-rs-share-variables-plugin'
+      - '../plugins/wp-rs-rest-api:/var/www/html/wp-content/plugins/wp-rs-rest-api'
       # Special configurations:
       - '../wp-config/.htaccess:/var/www/html/.htaccess'
       - '../wp-config/wp-config.php:/var/www/html/wp-config.php'

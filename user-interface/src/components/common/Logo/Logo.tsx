@@ -7,7 +7,7 @@ export const Logo = () => {
   const logoSize = useBreakpointValue(bkpBigImage);
   return (
     <Image
-      source={LogoImage}
+      source={{ uri: LogoImage }}
       resizeMode={"contain"}
       size={logoSize}
       alt={"Logo"}

@@ -3,7 +3,7 @@
 // This file is generated automatically by: node config-generator.js
 // The variables are taking from '../wp-container/.env'
 
-const configEnv = 
+module.exports = 
 {
   HOST_IP: '192.168.100.18',
   COMP_TIME : 'Fri Jun 24 2022 01:21:48 GMT-0500 (Ecuador Time)',
@@ -13,5 +13,3 @@ const configEnv =
   WP_REST_API_PLUGIN: 'wp-rs-rest-api'
 }
 
-
-export default configEnv;
