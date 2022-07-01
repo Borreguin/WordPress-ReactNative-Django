@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { NativeBaseProvider } from "native-base";
+import { NativeBaseProvider, Text, View } from "native-base";
 import { configTheme, defaultTheme } from "../../styles/theme";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { connect } from "react-redux";
 import { RootState } from "../../store/store";
 import { validateToken } from "../../store/slices/loginSlice";
 
-const InitialView = () => {
+const AuthenticatedView = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log(loggedIn);
   return (
     <NativeBaseProvider theme={defaultTheme} config={configTheme}>
-      <LoginForm onLogin={setLoggedIn} />
+      {!loggedIn ? (
+        <LoginForm onLogin={setLoggedIn} />
+      ) : (
+        <View h={"500px"}>
+          <Text>Authenticated</Text>
+        </View>
+      )}
     </NativeBaseProvider>
   );
 };
@@ -27,4 +32,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(InitialView);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthenticatedView);
