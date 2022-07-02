@@ -38,3 +38,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# producción:
+/user-interface/src/constants/config.js
+/user-interface/src/constants/config-module.js
+/user-interface/src/constants/config-module-entryPoints.js
