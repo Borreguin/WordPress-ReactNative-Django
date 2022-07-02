@@ -4,7 +4,7 @@
  * Plugin URI: 
  * Description: REST API for management
  * Version: 1
- * Author: Roberto Sánchez 
+ * Author: Roberto Sanchez
  * Author URI: 
  * License: GPLv2+
  * Text Domain:
@@ -17,28 +17,17 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Enqueue frontend scripts.
+ * Enqueue main script to import dynamically each entry-point.
  */
-function frontend_scripts() {
+function register_entry_points_script() {
 	wp_enqueue_script(
-	'wds-wwe-frontend-js',
-	plugins_url( 'build/static/js/frontend.js', __FILE__ ),
+	'register-entry-points-script-js',
+	plugins_url( 'build/static/js/main.js', __FILE__ ),
 	[ ], 'v.0.0.1'
 	);
 }
-add_action( 'wp_enqueue_scripts', 'frontend_scripts' );
+add_action( 'wp_enqueue_scripts', 'register_entry_points_script' );
 
-/**
- * Enqueue admin scripts.
- */
-function admin_scripts() {
-	wp_enqueue_script(
-	'wds-wwe-admin-js',
-	plugins_url( 'build/static/js/admin.js', __FILE__ ),
-	[ ]
-	);
-}
-add_action( 'admin_enqueue_scripts', 'admin_scripts' );
 
 // This allows to hide endpoints to non-authenticated users:
 add_filter( 'rest_authentication_errors', function( $result ) {
@@ -65,7 +54,7 @@ add_filter( 'rest_authentication_errors', function( $result ) {
 });
 
 // This hide the default user bar and it is substituted by:
-add_filter( 'show_admin_bar', '__return_true');
+// add_filter( 'show_admin_bar', '__return_true');
 
 
 function add_cors_http_header(){

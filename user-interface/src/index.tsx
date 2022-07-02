@@ -1,37 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import InitialView from "./views/InitialView/InitialView";
-import { DevSupport } from "@react-buddy/ide-toolbox";
-import { ComponentPreviews, useInitial } from "./dev";
 import "./i18n/config"; // Allows translation
-import "./utils/icons"; // To use icons across the application
-import store, { persistor } from "./store/store"; // Adding redux store to React
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react"; // Provide the store to the application
+import "./utils/icons";
+import entryPointList from "./wb-entry-points/register-entry-points.js"; // To use entry points
 
-window.onload = renderThisComponent;
+window.onload = loadDynamicallyScriptsForEntryPoints;
 
-function renderThisComponent() {
-  const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
-  );
-
-  root.render(
-    <React.StrictMode>
-      <DevSupport
-        ComponentPreviews={ComponentPreviews}
-        useInitialHook={useInitial}
-      >
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <InitialView />
-          </PersistGate>
-        </Provider>
-      </DevSupport>
-    </React.StrictMode>
-  );
+function loadDynamicallyScriptsForEntryPoints() {
+  for (let entryPoint of entryPointList) {
+    const entryPointTag = document.getElementById(
+      entryPoint.name
+    ) as HTMLElement;
+    if (entryPointTag === null) {
+      continue;
+    }
+    let ScriptTag = document.createElement("script");
+    ScriptTag.src = entryPoint.url;
+    document.getElementsByTagName("head")[0].appendChild(ScriptTag);
+    console.log(`Entry-point added: ${ScriptTag}`);
+  }
 }
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();

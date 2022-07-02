@@ -2,8 +2,11 @@
  * This file creates a config.js using environmental variables for the whole project.
  * Generate ./src/constants/config.js
  */
-
+require = require("esm")(module);
 const fs = require("fs");
+const path = require("path");
+const epList =
+  require("./src/wb-entry-points/register-entry-points.js").default;
 
 let env_file_path;
 if (process.env.NODE_ENV === "prod") {
@@ -29,6 +32,7 @@ let configEnv = `
   WP_REST_API_PLUGIN: '${WP_REST_API_PLUGIN}'
 }
 `;
+
 // For Js file:
 let templateJs = `
 // Generated on: ${currentDate}
@@ -39,6 +43,7 @@ const configEnv = ${configEnv}
 
 export default configEnv;
 `;
+
 // For module file:
 let templateModule = `
 // Generated on: ${currentDate}
@@ -47,6 +52,25 @@ let templateModule = `
 
 module.exports = ${configEnv}
 `;
+// import * as path from "path";
+// import { fileURLToPath } from 'url';
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+const entryPointsPath = path.resolve(__dirname, "./src/wb-entry-points");
+let entryPointList = {};
+for (let ep of epList) {
+  entryPointList[ep.name] = path.resolve(entryPointsPath, ep.filename);
+}
+
+// For entry-points:
+let entryPointTemplate = `
+// Generated on: ${currentDate}
+// This file is generated automatically by: node config-generator.js
+// The variables are taking from ./src/webpack-entry-points/register-entry-points
+
+module.exports = ${JSON.stringify(entryPointList, null, 4)}
+`;
+
 console.log(`Configuration files generated automatically on ${currentDate}`);
 console.log("\t" + env_file_path);
 
@@ -64,5 +88,12 @@ fs.writeFile(configModuleFilePath, templateModule, function (err) {
     return console.log(err);
   }
   console.log("\t" + configModuleFilePath);
-  console.log("\n");
+});
+
+const entryPointsFilePath = "./src/constants/config-module-entryPoints.js";
+fs.writeFile(entryPointsFilePath, entryPointTemplate, function (err) {
+  if (err) {
+    return console.log(err);
+  }
+  console.log("\t" + entryPointsFilePath);
 });
