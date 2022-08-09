@@ -3,7 +3,18 @@ import { background } from "./colors";
 
 export const defaultTheme = extendTheme({
   colors: {
-    // Add new color
+    enterprise: {
+      light: "#D5F5BAFF",
+      normal: "#A0C855",
+      dark: "#5e8f03",
+      dim: "#3a4b04",
+    },
+    font: {
+      light: "#000000",
+      normal: "#fff",
+      dark: "#fff",
+      dim: "#fff",
+    },
     primary: {
       50: "#E3F2F9",
       100: "#C5E4F3",

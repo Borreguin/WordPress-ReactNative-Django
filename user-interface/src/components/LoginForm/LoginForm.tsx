@@ -21,19 +21,19 @@ import { HSeparator } from "../common/Separators/Separators";
 import { Logo } from "../common/Logo/Logo";
 import {
   getToken,
-  revokeToken,
+  // revokeToken,
   validateToken,
 } from "../../store/slices/loginSlice";
 import { connect } from "react-redux";
-import CustomAlert from "../common/CustomAlert/CustomAlert";
 import { RootState } from "../../store/store";
+import BlackAlert from "../common/BlackAlert/BlackAlert";
 
 const LoginForm = (props) => {
   const {
     isLoggedIn,
     loginAction,
     loginMsg,
-    logoutAction,
+    // logoutAction,
     loginValidateTokenAction,
     userName,
     onLogin,
@@ -102,16 +102,13 @@ const LoginForm = (props) => {
             {t("welcome")} {userName}
           </Text>
           <Divider my="3" bg={"transparent.100"} />
-          <Button onPress={() => logoutAction()} w={"100%"}>
-            {t("logout")}
-          </Button>
         </VStack>
       </FormControl>
     );
   };
   return (
     <ScrollView showsVerticalScrollIndicator={false} minH={"93vh"}>
-      <CustomAlert status={"info"} msg={loginMsg} />
+      <BlackAlert msg={loginMsg} />
       <View
         style={{
           flexDirection: flexDir,
@@ -149,7 +146,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loginAction: (userNameOrMail, password) =>
       dispatch(getToken(userNameOrMail, password)),
-    logoutAction: () => dispatch(revokeToken()),
+    // logoutAction: () => dispatch(revokeToken()),
     loginValidateTokenAction: () => dispatch(validateToken()),
   };
 };

@@ -22,8 +22,12 @@ module.exports = function override(config) {
       assetModuleFilename: "static/media/[name].[ext]",
       publicPath: `/wp-content/plugins/${configEnv.WP_REST_API_PLUGIN}/build/`,
     };
-    console.log(`\n Compile with the following configuration:`);
+    console.log(`\n Compiled with the following configuration:`);
     console.log(config);
+  } else {
+    config.entry = {
+      main: path.resolve(__dirname, "./src/App.tsx"),
+    };
   }
 
   return config;

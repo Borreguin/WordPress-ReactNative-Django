@@ -1,6 +1,6 @@
 /**
  * This file publishes the assets that were created by yarn build
- * Copy from ./assets to ../wp-container/plugins/wp-rs_rest_api
+ * Copy from ./build to ../wp-container/plugins/wp-rs_rest_api
  */
 
 const fs = require("fs");

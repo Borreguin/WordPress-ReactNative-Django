@@ -78,6 +78,12 @@ export const loginSlice = createSlice({
     loginLogout: () => {
       return { ...initialState, message: i18n.t("logoutSuccess") };
     },
+    loginClean: (state) => {
+      state.user = null;
+      state.loading = false;
+      state.isLoggedIn = false;
+      state.roles = [];
+    },
   },
 });
 
@@ -86,6 +92,7 @@ export const {
   loginOnFailure,
   loginSetToken,
   loginRequested,
+  loginClean,
   loginReset,
   loginOnFailureWithMsg,
   loginLogout,
@@ -170,7 +177,7 @@ export const validateToken = () => {
 export const revokeToken = () => {
   return async (dispatch, getState: () => RootState) => {
     if (getState().login.token === null) {
-      dispatch(loginLogout());
+      dispatch(loginClean());
       return;
     }
     const config = createTokenHeader(getState().login.token);
@@ -188,9 +195,8 @@ export const revokeToken = () => {
 // open WordPress session:
 export const openWordPressSession = () => {
   return async (dispatch, getState: () => RootState) => {
-    console.log("me openWordPress Session", wpJwtAPI.autoLogin);
     if (getState().login.token === null) {
-      dispatch(loginLogout());
+      dispatch(loginClean());
       return;
     }
     // const config = createTokenHeader(getState().login.token);
@@ -202,10 +208,10 @@ export const openWordPressSession = () => {
     await axios
       .get(wpJwtAPI.autoLogin, config)
       .then((resp) => {
+        // TODO: RS finish redirect if needed
         console.log("resp", resp);
         // window.location.href = confApp.baseURL + "/home";
       })
       .catch((e) => dispatchOnError(dispatch, e));
-    console.log("finishing");
   };
 };

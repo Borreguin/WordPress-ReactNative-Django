@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import InitialView from "./views/AuthenticatedView/AuthenticatedView";
-import { DevSupport } from "@react-buddy/ide-toolbox";
-import { ComponentPreviews, useInitial } from "./dev";
 import "./i18n/config"; // Allows translation
 import "./utils/icons"; // To use icons across the application
 import store, { persistor } from "./store/store"; // Adding redux store to React
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react"; // Provide the store to the application
+import { routing } from "./views/Routing";
 
 window.onload = renderThisComponent;
 
@@ -18,16 +16,11 @@ function renderThisComponent() {
 
   root.render(
     <React.StrictMode>
-      <DevSupport
-        ComponentPreviews={ComponentPreviews}
-        useInitialHook={useInitial}
-      >
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <InitialView />
-          </PersistGate>
-        </Provider>
-      </DevSupport>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          {routing}
+        </PersistGate>
+      </Provider>
     </React.StrictMode>
   );
 }

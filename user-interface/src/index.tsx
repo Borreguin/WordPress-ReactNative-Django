@@ -15,6 +15,6 @@ function loadDynamicallyScriptsForEntryPoints() {
     let ScriptTag = document.createElement("script");
     ScriptTag.src = entryPoint.url;
     document.getElementsByTagName("head")[0].appendChild(ScriptTag);
-    console.log(`Entry-point added: ${ScriptTag}`);
+    console.log(`Entry-point added: ${entryPoint.name}`);
   }
 }

@@ -1,6 +1,9 @@
 /**
  * This file creates a config.js using environmental variables for the whole project.
- * Generate ./src/constants/config.js
+ * Generate:
+ *      ./src/constants/config.js
+ *      ./src/constants/config-module.js
+ *      ./src/constants/config-module-entryPoints.js
  */
 require = require("esm")(module);
 const fs = require("fs");
