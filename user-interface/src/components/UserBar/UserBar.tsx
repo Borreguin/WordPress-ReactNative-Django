@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import inverseLogo from "../../resources/images/inverseLogo.png";
 import FontAwesomeIcon from "react-native-vector-icons/dist/FontAwesome";
 import { configTheme, defaultTheme } from "../../styles/theme";
-import { Menu } from "../common/Menu/Menu";
+import Menu from "../common/Menu/Menu";
 
 const UserBar = () => {
   return (
@@ -34,6 +34,12 @@ const UserBar = () => {
                 title: "test",
                 action: () => {
                   console.log("check");
+                },
+              },
+              {
+                title: "test2",
+                action: () => {
+                  console.log("check2");
                 },
               },
             ]}

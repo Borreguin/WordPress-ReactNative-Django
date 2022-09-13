@@ -56,7 +56,7 @@ export default StyleSheet.create({
   },
   _menu: {
     position: "absolute",
-    right: 7,
+    right: 1,
     cursor: "pointer",
   },
 });

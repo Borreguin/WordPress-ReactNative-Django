@@ -1,37 +1,63 @@
 import React, { useState } from "react";
-import { View, Text, Image, Pressable } from "native-base";
+import { View, Text, Image } from "native-base";
 import Styles from "./Menu.style";
-import { ImageSourcePropType } from "react-native";
+import {
+  ImageSourcePropType,
+  LayoutChangeEvent,
+  TouchableOpacity,
+} from "react-native";
 
 type submenu = {
   title: String;
   action: Function;
 };
 
-interface MenuProps {
+interface MenuRequiredProps {
   menu: Array<submenu>;
   iconImageSource: ImageSourcePropType;
   iconSize: number;
 }
 
-export const Menu = (props: MenuProps) => {
+interface MenuOptionalProps {
+  bg: string;
+  fontSize: number;
+  textColor: string;
+  menuSize: number;
+}
+
+interface MenuProps extends MenuRequiredProps, MenuOptionalProps {}
+
+const defaultProps: MenuOptionalProps = {
+  bg: "#000000",
+  fontSize: 18,
+  textColor: "#ffffff",
+  menuSize: 150,
+};
+
+const Menu = (props: MenuProps) => {
   const [openMenu, setOpenMenu] = useState(false);
-  const { menu, iconImageSource, iconSize } = props;
+  const { menu, iconImageSource, iconSize, bg, fontSize, textColor, menuSize } =
+    props;
+  const [menuLeft, setMenuLeft] = useState(0);
+  const [menuTop, setMenuTop] = useState(0);
 
   const renderSubMenu = () => {
     return menu.map((submenu, ix) => (
-      <View key={ix}>
-        <Text>{submenu.title}</Text>
-      </View>
+      <TouchableOpacity key={ix} onPress={() => submenu.action()}>
+        <View style={Styles._submenu} bg={bg} width={menuSize}>
+          <Text fontSize={fontSize} color={textColor}>
+            {submenu.title}
+          </Text>
+        </View>
+      </TouchableOpacity>
     ));
   };
 
   const renderIcon = () => {
     return (
-      <Pressable
+      <TouchableOpacity
         style={Styles._menu}
         onPress={() => {
-          console.log("open/close", openMenu);
           setOpenMenu(!openMenu);
         }}
       >
@@ -41,14 +67,28 @@ export const Menu = (props: MenuProps) => {
           size={iconSize}
           alt={"Menu logo"}
         />
-      </Pressable>
+      </TouchableOpacity>
     );
   };
 
   return (
     <View>
-      {renderIcon()}
-      {openMenu ? renderSubMenu() : <View />}
+      <View
+        onLayout={(e: LayoutChangeEvent) => {
+          const layout = e.nativeEvent.layout;
+          setMenuLeft(layout["left"] + 2 + layout.width - menuSize);
+          setMenuTop(layout["top"] + 2 + layout.height);
+        }}
+      >
+        {renderIcon()}
+      </View>
+      <View style={Styles._submenuContainer} top={menuTop} left={menuLeft}>
+        {openMenu ? renderSubMenu() : <View />}
+      </View>
     </View>
   );
 };
+
+Menu.defaultProps = defaultProps;
+
+export default Menu;
