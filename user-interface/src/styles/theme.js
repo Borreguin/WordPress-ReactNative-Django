@@ -15,6 +15,9 @@ export const defaultTheme = extendTheme({
       dark: "#fff",
       dim: "#fff",
     },
+    button: {
+      primary: "#007ab8",
+    },
     primary: {
       50: "#E3F2F9",
       100: "#C5E4F3",
@@ -66,6 +69,7 @@ export const defaultTheme = extendTheme({
 
     background: {
       default: background.default,
+      dark: "#000000",
     },
   },
   config: {

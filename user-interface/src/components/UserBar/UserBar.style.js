@@ -3,13 +3,18 @@ import { defaultTheme } from "../../styles/theme";
 
 export default StyleSheet.create({
   _UserBar: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
     position: "absolute",
     width: "100%",
-    height: 38,
+    height: 52,
     overflow: "hidden",
-    backgroundColor: "#000000",
+    backgroundColor: defaultTheme.colors.background.dark,
   },
   _UserIdentifier: {
+    display: "flex",
+    flexDirection: "row",
     width: "40%",
     maxWidth: 450,
     minWidth: 250,
@@ -20,24 +25,13 @@ export default StyleSheet.create({
     borderBottomEndRadius: 40,
   },
   _user_avatar_filled: {
-    position: "absolute",
-    backgroundColor: "transparent",
-    borderRadius: 20,
-    margin: 1,
-    border: "solid",
-    color: "white",
-  },
-  _iconUserStyle: {
-    backgroundColor: "transparent",
-    alignItems: "center",
-    margin: -1,
+    margin: 2,
   },
   _userName: {
-    minWidth: "40%",
-    marginLeft: 40,
-    margin: "auto",
+    marginVertical: "auto",
+    marginLeft: 7,
+    marginRight: 140,
     textAlign: "left",
-    overflow: "hidden",
   },
   _userNameLabel: {
     fontFamily: "Roboto",
@@ -45,18 +39,10 @@ export default StyleSheet.create({
     color: defaultTheme.colors.font.light,
     fontWeight: "900",
   },
-  _inverseLogo: {
-    position: "absolute",
-    width: 20,
-    height: 28,
-    borderRadius: 0,
-    opacity: 1,
-    right: 7,
-    top: 2,
-  },
-  _menu: {
-    position: "absolute",
-    right: 1,
+  _sidebarButton: {
+    backgroundColor: defaultTheme.colors.button.primary,
+    marginVertical: "auto",
+    padding: 10,
     cursor: "pointer",
   },
 });

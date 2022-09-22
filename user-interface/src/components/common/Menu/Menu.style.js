@@ -7,8 +7,12 @@ export default StyleSheet.create({
   _submenuContainer: {
     position: "fixed",
     zIndex: 5000,
+    backgroundColor: "#736e6e",
   },
   _submenu: {
-    minHeight: 30,
+    minHeight: 40,
+    padding: "5%",
+    marginVertical: 1,
+    marginHorizontal: 2,
   },
 });
