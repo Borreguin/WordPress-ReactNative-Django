@@ -19,7 +19,7 @@ const publish_build = () => {
     console.log(`Error: This path does not exist ${toCopyPath}`);
     return;
   }
-  console.log(`Star copying from ${buildPath} to ${toCopyPath}`);
+  console.log(`Start copying from ${buildPath} to ${toCopyPath}`);
   try {
     fs.rmSync(copyBuildPath, { recursive: true, force: true });
     fs.cpSync(buildPath, copyBuildPath, { recursive: true, force: true });

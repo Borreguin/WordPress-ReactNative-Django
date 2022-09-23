@@ -17,7 +17,9 @@ export const routes = [
   },
   {
     path: "/UserBar",
-    component: <UserBar />,
+    component: (
+      <UserBar onSideBarClick={(status) => console.log("Sidebar", status)} />
+    ),
     description: "UserBar",
   },
 ];

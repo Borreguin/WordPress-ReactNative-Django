@@ -50,6 +50,7 @@ export const colorList = [
 ];
 
 export const selectColorForThisName = (userName: string) => {
+  if (userName === undefined) return colorList[0];
   const value = userName.split("").reduce((acc, val) => {
     return acc + val.charCodeAt(0);
   }, 0);

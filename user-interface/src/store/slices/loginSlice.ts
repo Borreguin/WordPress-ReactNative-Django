@@ -4,7 +4,7 @@ import i18n from "i18next";
 import { RootState } from "../store";
 import { wpJwtAPI } from "../../constants/wp-api.constants";
 import axios from "axios";
-import { httpCodes } from "../../constants/base.constants";
+import { confApp, httpCodes } from "../../constants/base.constants";
 import { isValidEmail } from "../../utils/common";
 
 type User = {
@@ -158,6 +158,7 @@ export const getToken = (userNameOrMail, password) => {
 // Validate a token
 export const validateToken = () => {
   return async (dispatch, getState: () => RootState) => {
+    if (getState().login.token === null) return;
     const config = createTokenHeader(getState().login.token);
     await axios
       .get(wpJwtAPI.validate, config)
@@ -170,6 +171,17 @@ export const validateToken = () => {
         }
       })
       .catch((e) => dispatchOnError(dispatch, e));
+  };
+};
+
+// check if the user is still logged in
+export const validateIfIsStillLoggedIn = () => {
+  return async (dispatch) => {
+    const isLoggedIn = document.getElementsByClassName("logged-in").length > 0;
+    console.log("slice", "validateIfIsStillLoggedIn", isLoggedIn);
+    if (!isLoggedIn) {
+      dispatch(loginReset());
+    }
   };
 };
 
@@ -208,10 +220,9 @@ export const openWordPressSession = () => {
     await axios
       .get(wpJwtAPI.autoLogin, config)
       .then((resp) => {
-        // TODO: RS finish redirect if needed
-        console.log("resp", resp);
-        // window.location.href = confApp.baseURL + "/home";
+        console.log("autoLogin", resp);
+        window.location.href = confApp.baseURL + "/home";
       })
-      .catch((e) => dispatchOnError(dispatch, e));
+      .catch((e) => console.log(`Unable to redirect to page: ${e}`));
   };
 };

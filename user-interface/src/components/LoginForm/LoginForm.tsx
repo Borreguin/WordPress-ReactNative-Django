@@ -21,7 +21,7 @@ import { HSeparator } from "../common/Separators/Separators";
 import { Logo } from "../common/Logo/Logo";
 import {
   getToken,
-  // revokeToken,
+  validateIfIsStillLoggedIn,
   validateToken,
 } from "../../store/slices/loginSlice";
 import { connect } from "react-redux";
@@ -31,10 +31,10 @@ import BlackAlert from "../common/BlackAlert/BlackAlert";
 const LoginForm = (props) => {
   const {
     isLoggedIn,
-    loginAction,
+    loginFormAction,
     loginMsg,
-    // logoutAction,
     loginValidateTokenAction,
+    validateIfIsStillLoggedIn,
     userName,
     onLogin,
   } = props;
@@ -50,7 +50,11 @@ const LoginForm = (props) => {
     if (isLoggedIn) {
       loginValidateTokenAction();
     }
-  }, []);
+  }, [isLoggedIn, loginValidateTokenAction]);
+
+  useEffect(() => {
+    validateIfIsStillLoggedIn();
+  }, [validateIfIsStillLoggedIn]);
 
   useEffect(() => {
     validateCurrentToken();
@@ -58,7 +62,7 @@ const LoginForm = (props) => {
 
   useEffect(() => {
     onLogin(isLoggedIn);
-  }, [isLoggedIn]);
+  }, [isLoggedIn, onLogin]);
 
   const LoginSection = () => {
     return (
@@ -86,7 +90,7 @@ const LoginForm = (props) => {
             }
           />
           <Divider my="3" bg={"transparent.100"} />
-          <Button onPress={() => loginAction(userNameOrMail, password)}>
+          <Button onPress={() => loginFormAction(userNameOrMail, password)}>
             {t("login")}
           </Button>
         </VStack>
@@ -144,10 +148,10 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginAction: (userNameOrMail, password) =>
-      dispatch(getToken(userNameOrMail, password)),
-    // logoutAction: () => dispatch(revokeToken()),
     loginValidateTokenAction: () => dispatch(validateToken()),
+    validateIfIsStillLoggedIn: () => dispatch(validateIfIsStillLoggedIn()),
+    loginFormAction: (userNameOrMail, password) =>
+      dispatch(getToken(userNameOrMail, password)),
   };
 };
 

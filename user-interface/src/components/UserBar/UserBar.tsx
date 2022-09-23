@@ -19,45 +19,62 @@ import {
 } from "../../utils/common";
 import { TouchableOpacity } from "react-native";
 
-const UserBar = (props) => {
-  console.log(props);
-  // const { userName } = props;
-  const userName = "Pablo Andrade";
+interface UserBarProps {
+  userName: string;
+  isLoggedIn: boolean;
+  onSideBarClick: Function;
+}
+
+const UserBar = (props: UserBarProps) => {
+  const { userName, isLoggedIn, onSideBarClick } = props;
   const [openSideBar, setOpenSideBar] = useState(false);
+
+  const renderSidebarButton = () => {
+    if (!isLoggedIn) return <View />;
+    return (
+      <Box style={Styles._sidebarButton}>
+        <TouchableOpacity
+          onPress={() => {
+            onSideBarClick(!openSideBar);
+            setOpenSideBar(!openSideBar);
+          }}
+        >
+          <Image
+            source={{ uri: inverseLogo }}
+            resizeMode={"contain"}
+            size={31}
+            alt={"Menu logo"}
+          />
+        </TouchableOpacity>
+      </Box>
+    );
+  };
+
+  const renderUserIdentifier = () => {
+    return (
+      <Box style={Styles._UserIdentifier} bg={bgLinear}>
+        <View style={Styles._user_avatar_filled}>
+          <Avatar
+            source={{ uri: "https://" }}
+            bg={selectColorForThisName(userName)}
+          >
+            {displayAbbreviation(userName)}
+          </Avatar>
+        </View>
+        <View style={Styles._userName}>
+          <Text isTruncated style={Styles._userNameLabel}>
+            {userName}
+          </Text>
+        </View>
+      </Box>
+    );
+  };
 
   return (
     <NativeBaseProvider theme={defaultTheme} config={configTheme}>
       <View style={Styles._UserBar}>
-        <Box style={Styles._UserIdentifier} bg={bgLinear}>
-          <View style={Styles._user_avatar_filled}>
-            <Avatar
-              source={{ uri: "https://" }}
-              bg={selectColorForThisName(userName)}
-            >
-              {displayAbbreviation(userName)}
-            </Avatar>
-          </View>
-          <View style={Styles._userName}>
-            <Text isTruncated style={Styles._userNameLabel}>
-              {userName}
-            </Text>
-          </View>
-        </Box>
-
-        <Box style={Styles._sidebarButton}>
-          <TouchableOpacity
-            onPress={() => {
-              setOpenSideBar(!openSideBar);
-            }}
-          >
-            <Image
-              source={{ uri: inverseLogo }}
-              resizeMode={"contain"}
-              size={31}
-              alt={"Menu logo"}
-            />
-          </TouchableOpacity>
-        </Box>
+        {renderUserIdentifier()}
+        {renderSidebarButton()}
       </View>
     </NativeBaseProvider>
   );
@@ -66,7 +83,6 @@ const UserBar = (props) => {
 const mapStateToProps = (state: RootState) => {
   return {
     isLoggedIn: state.login.isLoggedIn,
-    loginMsg: state.login.message,
     userName: state.login.user?.display_name,
   };
 };
