@@ -217,8 +217,12 @@ export const openWordPressSession = () => {
       .get(wpJwtAPI.autoLogin, configRequest)
       .then((resp) => {
         console.log("TODO: RS autologin definition", resp);
-        window.location.href = confApp.baseURL;
+        window.location.href = confApp.baseURL + "/home";
       })
-      .catch((e) => console.log(`Unable to redirect to page: ${e}`));
+      .catch((e) =>
+        console.log(
+          `Unable to redirect to page. Check option: Redirect after Auto-Login in Simple JWT Login (Wordpress Plugin)  ${e}`
+        )
+      );
   };
 };
