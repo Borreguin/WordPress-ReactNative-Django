@@ -12,10 +12,14 @@ const epList =
   require("./src/wb-entry-points/register-entry-points.js").default;
 
 let env_file_path;
+let ENV_PROD = false;
+let ENV_DEV = false;
 if (process.env.NODE_ENV === "prod") {
   env_file_path = "../wp-container/.env";
+  ENV_PROD = true;
 } else {
   env_file_path = "../wp-container/.dev.env";
+  ENV_DEV = true;
 }
 require("dotenv").config({ path: env_file_path });
 
@@ -29,7 +33,8 @@ let configEnv = `
 {
   HOST_IP: '${HOST_IP}',
   COMP_TIME : '${currentDate}',
-  NODE_ENV : '${process.env.NODE_ENV}',
+  ENV_PROD: ${ENV_PROD},
+  ENV_DEV: ${ENV_DEV},
   APP_PROTOCOL: '${APP_PROTOCOL}',
   WP_JWT_LOGIN: '${WP_JWT_LOGIN}',
   WP_REST_API_PLUGIN: '${WP_REST_API_PLUGIN}'
@@ -55,10 +60,7 @@ let templateModule = `
 
 module.exports = ${configEnv}
 `;
-// import * as path from "path";
-// import { fileURLToPath } from 'url';
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+
 const entryPointsPath = path.resolve(__dirname, "./src/wb-entry-points");
 let entryPointList = {};
 for (let ep of epList) {

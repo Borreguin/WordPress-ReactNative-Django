@@ -9,7 +9,7 @@ module.exports = function override(config) {
     include: path.resolve(__dirname, "./static/media/[name].[ext]"),
   });
 
-  if (configEnv.NODE_ENV === "prod") {
+  if (configEnv.ENV_PROD) {
     config.entry = {
       ...entryPoints,
       main: path.resolve(__dirname, "./src/index.tsx"),

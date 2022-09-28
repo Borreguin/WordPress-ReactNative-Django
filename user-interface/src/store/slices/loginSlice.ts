@@ -6,6 +6,7 @@ import { wpJwtAPI } from "../../constants/wp-api.constants";
 import axios from "axios";
 import { confApp, httpCodes } from "../../constants/base.constants";
 import { isValidEmail } from "../../utils/common";
+import config from "../../constants/config";
 
 type User = {
   ID: string;
@@ -178,8 +179,7 @@ export const validateToken = () => {
 export const validateIfIsStillLoggedIn = () => {
   return async (dispatch) => {
     const isLoggedIn = document.getElementsByClassName("logged-in").length > 0;
-    console.log("slice", "validateIfIsStillLoggedIn", isLoggedIn);
-    if (!isLoggedIn) {
+    if (!isLoggedIn && config.ENV_PROD) {
       dispatch(loginReset());
     }
   };
@@ -211,17 +211,13 @@ export const openWordPressSession = () => {
       dispatch(loginClean());
       return;
     }
-    // const config = createTokenHeader(getState().login.token);
-    const config = {
-      headers: {
-        Authorization: `Bearer ${getState().login.token}`,
-      },
-    };
+    if (config.ENV_DEV) return;
+    const configRequest = createTokenHeader(getState().login.token);
     await axios
-      .get(wpJwtAPI.autoLogin, config)
+      .get(wpJwtAPI.autoLogin, configRequest)
       .then((resp) => {
-        console.log("autoLogin", resp);
-        window.location.href = confApp.baseURL + "/home";
+        console.log("TODO: RS autologin definition", resp);
+        window.location.href = confApp.baseURL;
       })
       .catch((e) => console.log(`Unable to redirect to page: ${e}`));
   };
