@@ -16,7 +16,7 @@ const Styles = StyleSheet.create({
   },
 });
 
-export const RenderComponentList = () => {
+const RenderComponentList = () => {
   const create_links = () => {
     return (
       <View w={"100%"}>
@@ -46,3 +46,5 @@ export const RenderComponentList = () => {
     </NativeBaseProvider>
   );
 };
+
+export default RenderComponentList;

@@ -7,7 +7,7 @@ import {
   Avatar,
   Image,
 } from "native-base";
-import Styles, { bgLinear } from "./UserBar.style";
+import Styles from "./UserBar.style";
 import { RootState } from "../../store/store";
 import { revokeToken } from "../../store/slices/loginSlice";
 import { connect } from "react-redux";
@@ -52,7 +52,7 @@ const UserBar = (props: UserBarProps) => {
 
   const renderUserIdentifier = () => {
     return (
-      <Box style={Styles._UserIdentifier} bg={bgLinear}>
+      <Box style={Styles._UserIdentifier}>
         <View style={Styles._user_avatar_filled}>
           <Avatar
             source={{ uri: "https://" }}

@@ -8,9 +8,10 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     position: "absolute",
     width: "100%",
-    height: 52,
+    height: 70,
     overflow: "hidden",
     backgroundColor: defaultTheme.colors.background.dark,
+    padding: 7,
   },
   _UserIdentifier: {
     display: "flex",
@@ -20,12 +21,12 @@ export default StyleSheet.create({
     minWidth: 250,
     height: "100%",
     overflow: "hidden",
-    backgroundColor: defaultTheme.colors.enterprise.normal,
-    borderTopEndRadius: 12,
-    borderBottomEndRadius: 40,
+    borderTopEndRadius: 1,
+    borderBottomEndRadius: 1,
   },
   _user_avatar_filled: {
-    margin: 2,
+    marginVertical: "auto",
+    marginLeft: 3,
   },
   _userName: {
     marginVertical: "auto",
@@ -36,7 +37,8 @@ export default StyleSheet.create({
   _userNameLabel: {
     fontFamily: "Roboto",
     fontSize: 18,
-    color: defaultTheme.colors.font.light,
+    color: defaultTheme.colors.font.dark,
+    fontStyle: "italic",
     fontWeight: "900",
   },
   _sidebarButton: {

@@ -6,6 +6,8 @@ import store, { persistor } from "./store/store"; // Adding redux store to React
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react"; // Provide the store to the application
 import { routing } from "./views/Routing";
+import { configTheme, defaultTheme } from "./styles/theme";
+import { NativeBaseProvider } from "native-base";
 
 window.onload = renderThisComponent;
 
@@ -18,7 +20,9 @@ function renderThisComponent() {
     <React.StrictMode>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          {routing}
+          <NativeBaseProvider theme={defaultTheme} config={configTheme}>
+            {routing}
+          </NativeBaseProvider>
         </PersistGate>
       </Provider>
     </React.StrictMode>

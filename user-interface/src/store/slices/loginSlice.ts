@@ -8,7 +8,7 @@ import { confApp, httpCodes } from "../../constants/base.constants";
 import { isValidEmail } from "../../utils/common";
 import config from "../../constants/config";
 
-type User = {
+export type User = {
   ID: string;
   display_name: string;
   user_login: string;
