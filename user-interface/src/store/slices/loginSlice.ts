@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LOGIN_SLICE } from "../storeConstants";
+import { LOGIN_SLICE_KEY } from "../storeConstants";
 import i18n from "i18next";
 import { RootState } from "../store";
 import { wpJwtAPI } from "../../constants/wp-api.constants";
@@ -7,7 +7,17 @@ import axios from "axios";
 import { confApp, httpCodes } from "../../constants/base.constants";
 import { isValidEmail } from "../../utils/common";
 import config from "../../constants/config";
+import storage from "redux-persist/lib/storage";
 
+// configure the redux persist library:
+export const loginPersistConfig = {
+  key: LOGIN_SLICE_KEY,
+  version: 1,
+  storage,
+  blacklist: [],
+};
+
+// define types that are used in this slice
 export type User = {
   ID: string;
   display_name: string;
@@ -30,7 +40,7 @@ type TokenPayload = {
   jwt: string;
 };
 
-// Define a type for the slice state
+// Define the type for the slice state
 interface LoginState {
   isLoggedIn: boolean;
   user: User | null;
@@ -50,8 +60,9 @@ const initialState: LoginState = {
   loading: false,
 };
 
+// create the slice for the reducer
 export const loginSlice = createSlice({
-  name: LOGIN_SLICE,
+  name: LOGIN_SLICE_KEY,
   initialState: initialState,
   reducers: {
     loginReset: () => initialState,
@@ -103,6 +114,7 @@ export const {
 // Other code such as selectors can use the imported `RootState` type
 export const loginSelector = (state: RootState) => state.login;
 
+// define the reducer for this slice
 export default loginSlice.reducer;
 
 /*
