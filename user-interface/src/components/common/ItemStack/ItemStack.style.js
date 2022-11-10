@@ -17,12 +17,13 @@ export default StyleSheet.create({
     paddingHorizontal: 3,
   },
   _icon: {
-    width: 30,
-    height: 30,
-    paddingTop: 5,
-    paddingLeft: 5,
+    width: 35,
+    height: 35,
+    padding: "16%",
   },
   _shadow: {
+    width: 35,
+    height: 35,
     backgroundColor: "rgba(0,0,0,0.3)",
     borderRadius: "50%",
   },

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Badge, HStack, Pressable, Text, View } from "native-base";
 import FontAwesomeIcon from "react-native-vector-icons/dist/FontAwesome";
 import Styles from "./ItemStack.style";
 import { CustomColors } from "../../../styles/colors";
+import { v1 as uuid1 } from "uuid";
 
 interface RequiredProps {
   iconName: string;
@@ -12,11 +13,12 @@ interface RequiredProps {
 }
 
 interface OptionalProps {
-  badgeMsg: string | null;
-  badgeColorScheme: "success" | "danger" | "info" | "coolGray" | null;
-  badgeVariant: "solid" | "outline" | "subtle" | null;
-  background: string;
-  textColor: string;
+  badgeMsg?: string | null;
+  badgeColorScheme?: "success" | "danger" | "info" | "coolGray" | null;
+  badgeVariant?: "solid" | "outline" | "subtle" | null;
+  background?: string;
+  textColor?: string;
+  id?: string;
 }
 
 export interface ItemStackProps extends RequiredProps, OptionalProps {}
@@ -27,9 +29,16 @@ const defaultProps: OptionalProps = {
   badgeVariant: "solid",
   background: CustomColors.blackTransparent,
   textColor: CustomColors.white,
+  id: uuid1(),
 };
 
 const ItemStack = (props: ItemStackProps) => {
+  const [isSelected, setIsSelected] = useState(props.selected);
+
+  useEffect(() => {
+    setIsSelected(props.selected);
+  }, [props.selected]);
+
   const renderBadge = () => {
     if (!props.badgeMsg) return <View />;
     return (
@@ -39,10 +48,13 @@ const ItemStack = (props: ItemStackProps) => {
     );
   };
   const bg = props.badgeVariant === "outline" ? "white" : props.background;
-  const bgSelected = props.selected ? "rgba(227,157,73,0.58)" : "transparent";
+  const bgSelected = isSelected ? "rgba(227,157,73,0.58)" : "transparent";
   return (
     <Pressable
-      onPress={() => props.onPress()}
+      onPress={() => {
+        setIsSelected(true);
+        props.onPress();
+      }}
       bg={bgSelected}
       style={Styles._container}
     >
@@ -51,7 +63,7 @@ const ItemStack = (props: ItemStackProps) => {
           <View style={Styles._shadow}>
             <FontAwesomeIcon
               name={props.iconName}
-              size={20}
+              size={24}
               style={Styles._icon}
               color={props.textColor}
             />

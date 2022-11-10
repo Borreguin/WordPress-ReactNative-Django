@@ -1,29 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ItemStack, { ItemStackProps } from "../../common/ItemStack/ItemStack";
 import { View } from "native-base";
+import { v1 as uuid1 } from "uuid";
 
-interface RequiredProps {
+export interface SectionProps {
   items: Array<ItemStackProps>;
+  selectedItemId?: string | null;
+  onChange?: Function;
+  sectionId?: string | null;
 }
 
-export interface SectionProps extends RequiredProps {}
-
 const Section = (props: SectionProps) => {
-  const [selectedItem, setSelectedItem] = useState();
+  const [selectedIdx, setSelectedIdx] = useState(props.selectedItemId);
+  const id = !props.sectionId ? `${uuid1()}` : props.sectionId;
+  const sectionId = React.useRef(id);
 
-  const onItemPress = (it, ix, onPress: Function) => {
-    setSelectedItem(it);
-    onPress(it, ix);
+  useEffect(() => {
+    setSelectedIdx(props.selectedItemId);
+  }, [props.selectedItemId]);
+
+  const onItemPress = (it, idx, onPress: Function) => {
+    setSelectedIdx(idx);
+    onPress(it, idx);
+    if (props.onChange) {
+      props.onChange(it, idx);
+    }
   };
 
   const renderItems = () => {
-    return props.items.map((it, idx) => {
+    return props.items.map((it, ix) => {
+      const idx = `${ix}-${sectionId.current}`;
       return (
         <ItemStack
           key={idx}
+          id={idx}
           iconName={it.iconName}
           itemName={it.itemName}
-          selected={it === selectedItem}
+          selected={idx === selectedIdx}
           onPress={() => {
             onItemPress(it, idx, it.onPress);
           }}

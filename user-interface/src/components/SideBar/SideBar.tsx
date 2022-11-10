@@ -1,30 +1,34 @@
-import React from "react";
-import { RootState } from "../../store/store";
-import { revokeToken, User } from "../../store/slices/loginSlice";
-import { connect } from "react-redux";
-import { Box, View } from "native-base";
+import React, { useState } from "react";
+import { Box } from "native-base";
+import Section, { SectionProps } from "./Section/Section";
 
 interface SideBarProps {
-  user: User;
-  isLoggedIn: boolean;
+  sections: Array<SectionProps>;
 }
 
 const SideBar = (props: SideBarProps) => {
-  if (props.isLoggedIn) return <View />;
-  return <Box></Box>;
-};
+  const [selectedItemId, setSelectedItemId] = useState(null);
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    isLoggedIn: state.login.isLoggedIn,
-    user: state.login.user,
+  const onChange = (it, idx) => {
+    if (it && idx) {
+      setSelectedItemId(idx);
+    }
   };
+
+  return (
+    <Box>
+      {props.sections.map((sct, ix) => {
+        return (
+          <Section
+            key={ix}
+            items={sct.items}
+            selectedItemId={selectedItemId}
+            onChange={onChange}
+          />
+        );
+      })}
+    </Box>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logoutAction: () => dispatch(revokeToken()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SideBar);
+export default SideBar;

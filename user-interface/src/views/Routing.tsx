@@ -5,7 +5,11 @@ import UserBar from "../components/UserBar/UserBar";
 import RenderComponentList from "./RenderComponentList";
 import SideBar from "../components/SideBar/SideBar";
 import ItemStack from "../components/common/ItemStack/ItemStack";
-import { itemStackData, itemStackListData } from "./DataComponentList";
+import {
+  itemStackData,
+  sectionListData1,
+  sideBarData,
+} from "./DataComponentList";
 import Section from "../components/SideBar/Section/Section";
 
 export const routes = [
@@ -45,12 +49,12 @@ export const routes = [
   },
   {
     path: "/Section",
-    component: <Section items={itemStackListData} />,
+    component: <Section items={sectionListData1} />,
     description: "Section",
   },
   {
     path: "/SideBar",
-    component: <SideBar />,
+    component: <SideBar sections={sideBarData} />,
     description: "SideBar",
   },
 ];
